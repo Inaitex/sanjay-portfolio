@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanjay V — Creative Strategist & Founder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<script>
+  // ═══════════════════════════════════════════════════
+  //  📸 IMAGE CONFIGURATION — CHANGE PATHS HERE ONLY
+  // ═══════════════════════════════════════════════════
+  const IMAGES = {
+    // Hero card profile photo
+    profile: "images\\Profile picture\\profile picture.png",  // e.g. "photos/profile.jpg" or full URL
+
+    // Education section
+    graduation_bcom: "",       // B.Com graduation photo
+    graduation_mba: "",        // MBA / current photo
+    graduation_school: "",     // School photo
+
+    // Leadership section — map to event names
+    leadership: {
+      commerce_ceo:   "",   // Commerce Conglomeration CEO
+      digital_head:   "",   // COMMEX'22 Digital Head
+      president:      "",   // COMMERZIUM'23 President
+      nss_marketing:  "",   // NSS Marketing Head
+      mgmt_advisor:   "",   // Management Advisor
+      merfesta:       "",   // MERFESTA'24 Head
+    },
+
+    // Achievements section
+    achievements: {
+      best_student:   "",   // Best Student of the Year
+      regularity:     "",   // Regularity Award
+      leadership_exc: "",   // Leadership & Event Excellence
+      recognitions:   "",   // Multiple Recognitions
+      co_founder:     "",   // Co-Founder Commerce Cong.
+    },
+
+    // Guest / Speaking section
+    speaking: {
+      investiture_2025:  "",  // Investiture Ceremony 2025
+      arthashasthra:     "",  // Arthashasthra'25 Chief Guest
+      freshers_2025:     "",  // Freshers Inauguration 2025
+      guest_lecture:     "",  // Digital Marketing Lecture
+      fusion26:          "",  // Fusion'26 Judge
+      luminex26:         "",  // Luminex'26 Judge
+    }
+  };
+</script>
+
+<style>
+  :root {
+    --sage: #b5c5b0;
+    --sage-light: #d4e0d0;
+    --blue-pastel: #b8c9d9;
+    --teal: #7a9fa8;
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --cream: #f7f4ef;
+    --warm-white: #faf8f4;
+    --text-dark: #1a1a18;
+    --text-mid: #4a4a42;
+    --text-light: #8a8a7e;
+    --border: rgba(26,26,24,0.08);
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(250,248,244,0.88);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.4s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 400; letter-spacing: 0.04em;
+    color: var(--text-dark); text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-mid);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 80% 20%, rgba(181,197,176,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(184,201,217,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 60% 60%, rgba(201,169,110,0.07) 0%, transparent 50%);
+  }
+  .hero-blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px);
+    animation: float 12s ease-in-out infinite;
+  }
+  .blob-1 { width: 500px; height: 500px; background: rgba(181,197,176,0.12); top: -100px; right: -100px; }
+  .blob-2 { width: 350px; height: 350px; background: rgba(184,201,217,0.10); bottom: 0; left: 200px; animation-delay: -5s; }
+  @keyframes float {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(-20px,30px) scale(1.05); }
+    66% { transform: translate(20px,-20px) scale(0.97); }
+  }
+  .hero-left { position: relative; z-index: 1; padding-right: 3rem; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.8rem;
+  }
+  .hero-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 300;
+    line-height: 1.05; letter-spacing: -0.01em;
+    margin-bottom: 0.3rem; animation: fadeUp 1s ease both;
+  }
+  .hero-name em { font-style: italic; color: var(--teal); }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem,2vw,1.5rem); font-weight: 300;
+    color: var(--text-mid); letter-spacing: 0.02em;
+    margin-bottom: 1.8rem; animation: fadeUp 1s 0.15s ease both;
+  }
+  .hero-desc {
+    font-size: 0.9rem; line-height: 1.75; color: var(--text-light);
+    max-width: 480px; animation: fadeUp 1s 0.3s ease both; margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 1s 0.45s ease both; }
+  .btn-primary {
+    padding: 0.85rem 2rem; background: var(--text-dark); color: var(--warm-white);
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none;
+    transition: background 0.3s, transform 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+  .btn-outline {
+    padding: 0.85rem 2rem; background: transparent; color: var(--text-dark);
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1.5px solid var(--text-dark); cursor: pointer; text-decoration: none;
+    transition: all 0.3s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+  .hero-right {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; align-items: center;
+  }
+
+  /* ─── FLIP CARD ─── */
+  .flip-card-wrapper {
+    width: 360px; height: 520px;
+    perspective: 1200px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .flip-card-inner {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+  .flip-card-wrapper:hover .flip-card-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 1px solid rgba(201,169,110,0.25);
+    overflow: hidden;
+  }
+
+  /* FRONT — full bleed profile photo */
+  .flip-front {
+    background: linear-gradient(160deg, var(--sage-light) 0%, var(--blue-pastel) 60%, var(--gold-light) 100%);
+  }
+  .flip-front-photo {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .flip-front-photo img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+  }
+  .flip-front-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7rem; font-weight: 300;
+    color: rgba(26,26,24,0.2);
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+  .flip-front::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+    background: linear-gradient(to top, rgba(26,26,24,0.65) 0%, transparent 100%);
+    pointer-events: none; z-index: 1;
+  }
+  .flip-front-label {
+    position: absolute; bottom: 1.8rem; left: 1.8rem; z-index: 2;
+  }
+  .flip-front-label .fn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 400;
+    color: #fff; display: block; line-height: 1.1;
+  }
+  .flip-front-label .fr {
+    font-size: 0.67rem; font-weight: 500; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--gold-light);
+    display: block; margin-top: 0.35rem;
+  }
+  .flip-hint {
+    position: absolute; top: 1rem; right: 1rem; z-index: 3;
+    font-size: 0.58rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    display: flex; align-items: center; gap: 0.3rem;
+    background: rgba(0,0,0,0.22); padding: 0.3rem 0.65rem;
+    backdrop-filter: blur(6px);
+  }
+  .flip-hint::after { content: '↻'; font-size: 0.85rem; }
+
+  /* BACK — name + role + stats */
+  .flip-back {
+    background: #ffffff;
+    transform: rotateY(180deg);
+    padding: 0;
+    display: flex; flex-direction: column;
+  }
+  /* gold top accent bar */
+  .flip-back::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--sage), var(--gold), var(--blue-pastel));
+    z-index: 2;
+  }
+  .back-inner {
+    padding: 2.5rem 2.5rem 2rem;
+    display: flex; flex-direction: column;
+    height: 100%;
+    position: relative; z-index: 1;
+  }
+  .back-monogram {
+    width: 54px; height: 54px;
+    background: linear-gradient(135deg, var(--sage-light), var(--blue-pastel));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 500; color: var(--text-dark);
+    margin-bottom: 1.3rem;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+  }
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 400;
+    color: var(--text-dark); line-height: 1.05;
+    margin-bottom: 0.5rem;
+  }
+  .card-role {
+    font-size: 0.68rem; color: var(--teal); font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    line-height: 1.7; margin-bottom: 0;
+  }
+  .back-divider {
+    width: 36px; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--sage));
+    margin: 1.4rem 0;
+    flex-shrink: 0;
+  }
+  .card-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.75rem; margin-top: auto;
+  }
+  .stat-item {
+    padding: 1.1rem 0.8rem;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.1rem; font-weight: 400;
+    color: var(--gold); display: block; line-height: 1; margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-size: 0.62rem; color: var(--text-light);
+    letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+  }
+  /* watermark */
+  .back-watermark {
+    position: absolute; bottom: -1rem; right: 0.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7rem; font-weight: 300;
+    color: rgba(181,197,176,0.13);
+    line-height: 1; pointer-events: none; user-select: none; z-index: 0;
+    letter-spacing: -0.03em;
+  }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ─── SECTIONS COMMON ─── */
+  section { padding: 7rem 4rem; }
+  .section-eyebrow {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-eyebrow::after { content:''; flex:1; max-width:40px; height:1px; background:var(--gold); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem,4vw,3rem); font-weight: 300; line-height: 1.15; margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--teal); }
+  .section-subtitle { font-size: 0.88rem; color: var(--text-light); line-height: 1.7; max-width: 520px; }
+
+  /* ─── PHOTO PLACEHOLDER UTILITY ─── */
+  .photo-slot {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--sage-light) 0%, var(--blue-pastel) 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .photo-slot img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+  }
+  .photo-slot .placeholder-icon {
+    font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5;
+  }
+  .photo-slot .placeholder-label {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(26,26,24,0.4);
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    background: var(--cream);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .about-text p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 1.2rem; }
+  .about-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-style: italic; font-weight: 300; line-height: 1.4;
+    color: var(--text-dark); padding: 2.5rem;
+    background: var(--warm-white); border-left: 3px solid var(--gold); position: relative;
+  }
+  .about-quote::before {
+    content:'\201C'; font-size:5rem; color:var(--sage-light);
+    position:absolute; top:-1rem; left:1.5rem;
+    font-family:'Cormorant Garamond',serif; line-height:1;
+  }
+
+  /* ─── EDUCATION ─── */
+  #education { background: var(--warm-white); }
+  .edu-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3.5rem; }
+  .edu-card {
+    border: 1px solid var(--border); background: var(--warm-white);
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .edu-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg,var(--sage),var(--blue-pastel),var(--gold));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+  }
+  .edu-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.07); }
+  .edu-card:hover::after { transform: scaleX(1); }
+  .edu-photo-strip {
+    width: 100%; height: 180px; overflow: hidden; position: relative;
+    background: linear-gradient(135deg, var(--sage-light), var(--blue-pastel));
+  }
+  .edu-photo-strip .photo-slot { height: 180px; }
+  .edu-card-body { padding: 2rem 2rem 2.5rem; }
+  .edu-year { font-size:0.68rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem; display:block; }
+  .edu-degree { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:400; margin-bottom:0.4rem; }
+  .edu-school { font-size:0.8rem; color:var(--text-light); margin-bottom:1rem; line-height:1.5; }
+  .edu-badge { display:inline-block; padding:0.3rem 0.9rem; background:var(--sage-light); font-size:0.72rem; font-weight:500; letter-spacing:0.06em; color:var(--text-dark); }
+  .edu-badge.current { background:rgba(201,169,110,0.15); color:var(--gold); }
+
+  /* ─── LEADERSHIP ─── */
+  #leadership { background: var(--cream); }
+  .lead-header { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; margin-bottom:3rem; }
+  .lead-contrib {
+    padding:2rem; background:var(--warm-white); border:1px solid var(--border);
+    font-size:0.88rem; color:var(--text-mid); line-height:1.7; text-align:center;
+  }
+  .lead-contrib strong {
+    font-family:'Cormorant Garamond',serif; font-size:1.5rem; display:block;
+    color:var(--gold); margin-bottom:0.3rem; font-style:italic;
+  }
+  .lead-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .lead-card {
+    background: var(--warm-white); border: 1px solid var(--border);
+    overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .lead-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
+  .lead-photo {
+    width: 100%; height: 160px; overflow: hidden; position: relative;
+  }
+  .lead-photo .photo-slot { height: 160px; }
+  .lead-card-body { padding: 1.5rem; }
+  .lead-event-tag {
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 0.5rem;
+  }
+  .lead-role { font-size: 0.85rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.25rem; }
+  .lead-org { font-size: 0.75rem; color: var(--text-light); line-height: 1.4; margin-bottom: 0.6rem; }
+  .lead-year-tag {
+    display: inline-block; padding: 0.2rem 0.6rem;
+    background: var(--sage-light); font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.08em; color: var(--text-dark);
+  }
+
+  /* ─── SPEAKING ─── */
+  #speaking { background: var(--warm-white); }
+  .speaking-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+  .speaking-card {
+    background: var(--warm-white); border: 1px solid var(--border);
+    overflow: hidden; transition: all 0.3s; position: relative;
+  }
+  .speaking-card:hover { border-color: rgba(201,169,110,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.06); transform: translateY(-3px); }
+  .speaking-photo {
+    width: 100%; height: 200px; overflow: hidden; position: relative;
+  }
+  .speaking-photo .photo-slot { height: 200px; }
+  .speaking-card-body { padding: 1.5rem; }
+  .speaking-role { font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem; }
+  .speaking-event { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:400; margin-bottom:0.4rem; }
+  .speaking-org { font-size:0.78rem; color:var(--text-light); }
+
+  /* ─── ACHIEVEMENTS ─── */
+  #achievements { background: var(--cream); }
+  .ach-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+  .ach-item {
+    background: var(--warm-white); border: 1px solid var(--border);
+    overflow: hidden; transition: all 0.3s;
+  }
+  .ach-item:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
+  .ach-photo {
+    width: 100%; height: 140px; overflow: hidden; position: relative;
+  }
+  .ach-photo .photo-slot { height: 140px; }
+  .ach-item-body { padding: 1.2rem; text-align: center; }
+  .ach-icon { font-size:1.4rem; margin-bottom:0.5rem; }
+  .ach-title { font-size:0.78rem; font-weight:500; color:var(--text-dark); line-height:1.4; }
+
+  /* ─── ELEVATE HUB ─── */
+  #elevate {
+    background: var(--text-dark); color: var(--warm-white);
+    position: relative; overflow: hidden;
+  }
+  .elevate-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 90% 10%, rgba(181,197,176,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 90%, rgba(201,169,110,0.08) 0%, transparent 60%);
+  }
+  .elevate-inner { position: relative; z-index: 1; }
+  .elevate-inner .section-eyebrow { color:var(--gold-light); }
+  .elevate-inner .section-eyebrow::after { background:var(--gold-light); }
+  .elevate-inner .section-title { color: var(--warm-white); }
+  .elevate-hero-text {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(1.3rem,2.5vw,1.8rem);
+    font-weight:300; font-style:italic; color:rgba(250,248,244,0.75);
+    max-width:600px; line-height:1.6; margin-bottom:2rem;
+  }
+  .elevate-highlight {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(1.1rem,2vw,1.5rem); font-weight:400;
+    color:var(--gold-light); letter-spacing:0.03em; margin-bottom:3.5rem; line-height:1.6;
+  }
+  .elevate-highlight span { background:rgba(201,169,110,0.15); padding:0.1em 0.3em; border-bottom:1px solid var(--gold); }
+  .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+  .service-col {
+    padding:2.5rem; border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.03); transition: border-color 0.3s, background 0.3s;
+  }
+  .service-col:hover { border-color:rgba(201,169,110,0.25); background:rgba(201,169,110,0.04); }
+  .service-cat { font-size:0.68rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .service-col h3 { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; color:var(--warm-white); margin-bottom:1.2rem; }
+  .service-items { list-style:none; }
+  .service-items li { font-size:0.82rem; color:rgba(250,248,244,0.6); padding:0.45rem 0; border-bottom:1px solid rgba(255,255,255,0.04); display:flex; align-items:center; gap:0.6rem; }
+  .service-items li::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+  .service-items li:last-child { border-bottom:none; }
+
+  /* ─── IMPACT ─── */
+  #impact { background: var(--warm-white); }
+  .impact-nums { display:grid; grid-template-columns:repeat(6,1fr); gap:1.5rem; margin-top:3.5rem; }
+  .impact-item {
+    text-align:center; padding:2.5rem 1rem; border:1px solid var(--border);
+    transition:all 0.3s; position:relative; overflow:hidden;
+  }
+  .impact-item::before {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg,rgba(181,197,176,0.05),rgba(201,169,110,0.05));
+    opacity:0; transition:opacity 0.3s;
+  }
+  .impact-item:hover::before { opacity:1; }
+  .impact-item:hover { transform:translateY(-3px); }
+  .impact-num { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:300; color:var(--gold); display:block; line-height:1; margin-bottom:0.5rem; }
+  .impact-label { font-size:0.72rem; color:var(--text-light); letter-spacing:0.08em; text-transform:uppercase; }
+
+  /* ─── BUILDING ─── */
+  #building {
+    background: var(--cream);
+    display: grid; grid-template-columns: 1fr 1.2fr;
+    gap: 5rem; align-items: center;
+  }
+  .building-badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    padding:0.4rem 1rem; background:rgba(201,169,110,0.1); border:1px solid rgba(201,169,110,0.25);
+    font-size:0.68rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem;
+  }
+  .building-badge::before { content:'●'; font-size:0.4rem; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
+  .building-brand { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3.5vw,2.8rem); font-weight:300; line-height:1.15; margin-bottom:1rem; }
+  .building-desc { font-size:0.88rem; color:var(--text-mid); line-height:1.8; }
+  .building-visual {
+    aspect-ratio:4/3; background:linear-gradient(135deg,#f5f0e8 0%,#ede5d5 50%,#e8dcc8 100%);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden; border:1px solid rgba(201,169,110,0.2);
+  }
+  .building-visual::before {
+    content:'ANUGRAHA NIKETAN'; font-family:'Cormorant Garamond',serif;
+    font-size:1.4rem; font-weight:300; letter-spacing:0.15em;
+    color:rgba(150,110,60,0.4); position:absolute; text-align:center; padding:2rem;
+  }
+  .building-visual::after {
+    content:'Launching Soon'; font-size:0.72rem; font-weight:500; letter-spacing:0.15em;
+    text-transform:uppercase; color:var(--gold); position:absolute; bottom:1.5rem;
+    background:rgba(201,169,110,0.12); padding:0.5rem 1.5rem; border:1px solid rgba(201,169,110,0.3);
+  }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--text-dark); color: var(--warm-white); }
+  .contact-inner { position:relative; z-index:1; max-width:700px; margin:0 auto; text-align:center; }
+  #contact .section-eyebrow { justify-content:center; color:var(--gold-light); }
+  #contact .section-eyebrow::after { display:none; }
+  #contact .section-title { color:var(--warm-white); text-align:center; }
+  .contact-tagline { font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-style:italic; font-weight:300; color:rgba(250,248,244,0.6); margin:1rem 0 3rem; }
+  .contact-links { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-bottom:3rem; }
+  .contact-item {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.4rem;
+    width:190px;
+    padding:1.25rem 1rem;
+    text-decoration:none;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:1.25rem;
+    background:rgba(255,255,255,0.02);
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    transition:transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .contact-item:hover {
+    transform:translateY(-6px);
+    background:rgba(255,255,255,0.08);
+    border-color:rgba(255,255,255,0.16);
+    box-shadow:0 18px 40px rgba(0,0,0,0.12);
+  }
+  .contact-icon {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:3rem;
+    height:3rem;
+    border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    color:var(--gold);
+    font-size:1.4rem;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08);
+    transition:background 0.3s ease, transform 0.3s ease;
+  }
+  .contact-item:hover .contact-icon {
+    background:rgba(255,255,255,0.2);
+    transform:scale(1.05);
+  }
+  .contact-type { font-size:0.65rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+  .contact-val { font-size:0.95rem; color:rgba(250,248,244,0.85); }
+  .contact-divider { height:1px; background:rgba(255,255,255,0.08); margin:2.5rem 0; }
+  .footer-tagline { font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; color:rgba(250,248,244,0.35); letter-spacing:0.05em; }
+  .footer-copy { margin-top:0.8rem; font-size:0.72rem; color:rgba(250,248,244,0.2); letter-spacing:0.1em; }
+
+  /* ─── REVEAL ─── */
+  .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-delay-1 { transition-delay:0.1s; }
+  .reveal-delay-2 { transition-delay:0.2s; }
+  .reveal-delay-3 { transition-delay:0.3s; }
+  .reveal-delay-4 { transition-delay:0.4s; }
+
+  /* ─── GALLERY LIGHTBOX ─── */
+  .gallery-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(26,26,24,0.95);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .gallery-modal.active {
+    display: flex;
+    opacity: 1;
+  }
+  .gallery-modal { align-items: center; justify-content: center; }
+  .gallery-container {
+    position: relative;
+    width: 90%; max-width: 900px;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s cubic-bezier(0.4,0.2,0.2,1), transform 0.5s cubic-bezier(0.4,0.2,0.2,1);
+  }
+  .gallery-slide.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 10;
+  }
+  .gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  .gallery-counter {
+    position: absolute;
+    top: 2rem; right: 2rem;
+    background: rgba(255,255,255,0.1);
+    color: var(--warm-white);
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    z-index: 20;
+  }
+  .gallery-nav {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    pointer-events: none;
+    z-index: 15;
+  }
+  .gallery-nav button {
+    pointer-events: all;
+    width: 50px; height: 50px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    color: var(--warm-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-nav button:hover {
+    background: rgba(201,169,110,0.25);
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: scale(1.1);
+  }
+  .gallery-close {
+    position: absolute;
+    top: 2rem; left: 2rem;
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    color: var(--warm-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    font-weight: 300;
+  }
+  .gallery-close:hover {
+    background: rgba(201,169,110,0.3);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .photo-slot.clickable {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .photo-slot.clickable:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width:900px) {
+    nav { padding:1.2rem 2rem; }
+    .nav-links { display:none; }
+    #hero { grid-template-columns:1fr; padding:7rem 2rem 4rem; gap:3rem; }
+    .hero-right { display:none; }
+    #about, #building { grid-template-columns:1fr; gap:2.5rem; }
+    section { padding:5rem 2rem; }
+    .edu-grid, .services-grid, .lead-grid, .speaking-grid { grid-template-columns:1fr; }
+    .ach-grid { grid-template-columns:repeat(2,1fr); }
+    .impact-nums { grid-template-columns:repeat(3,1fr); }
+    .lead-header { grid-template-columns:1fr; gap:2rem; }
+    .gallery-container { width: 95%; height: 70vh; }
+    .gallery-nav { padding: 0 1rem; }
+    .gallery-nav button { width: 40px; height: 40px; font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Sanjay <span>V</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#speaking">Speaking</a></li>
+    <li><a href="#elevate">Elevate Hub</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">Founder & Creative Strategist</div>
+    <h1 class="hero-name">Crafting Brands That<br><em>Connect, Engage</em><br>&amp; Elevate.</h1>
+    <p class="hero-tagline">Sanjay V — Founder of Elevate Hub</p>
+    <p class="hero-desc">Young entrepreneur and creative strategist focused on digital marketing, offline branding, experiential campaigns, and modern business growth solutions.</p>
+    <div class="hero-btns">
+      <a href="#elevate" class="btn-primary">Explore Elevate Hub</a>
+      <a href="#contact" class="btn-outline">Let's Connect</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <!-- FLIP CARD: Front = Profile, Back = Clients & Achievements -->
+    <div class="flip-card-wrapper">
+      <div class="flip-card-inner">
+
+        <!-- FRONT — full bleed profile photo -->
+        <div class="flip-front">
+          <div class="flip-hint">Hover</div>
+          <div class="flip-front-photo" id="profilePhotoEl">
+            <div class="flip-front-initials">SV</div>
+          </div>
+          <div class="flip-front-label">
+            <span class="fn">Sanjay V</span>
+            <span class="fr">Founder · Elevate Hub</span>
+          </div>
+        </div>
+
+        <!-- BACK — name, role, stats -->
+        <div class="flip-back">
+          <div class="back-watermark">SV</div>
+          <div class="back-inner">
+            <div class="back-monogram">SV</div>
+            <div class="card-name">Sanjay V</div>
+            <div class="card-role">Founder · Creative Strategist<br>MBA Candidate</div>
+            <div class="back-divider"></div>
+            <div class="card-stats">
+              <div class="stat-item"><span class="stat-num">40+</span><span class="stat-label">Clients</span></div>
+              <div class="stat-item"><span class="stat-num">300+</span><span class="stat-label">Projects</span></div>
+              <div class="stat-item"><span class="stat-num">50+</span><span class="stat-label">Events</span></div>
+              <div class="stat-item"><span class="stat-num">3+</span><span class="stat-label">Years</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <div class="section-eyebrow">About Me</div>
+    <h2 class="section-title">A Passionate<br><em>Entrepreneur</em> &amp;<br>Branding Professional</h2>
+    <br>
+    <p>Currently pursuing MBA at SRM Institute of Science and Technology, with hands-on experience in digital marketing, branding, event management, and business strategy.</p>
+    <p>Started my entrepreneurial journey in 2022 by building a creative branding and marketing venture focused on helping businesses grow through digital presence, offline branding, and experiential marketing solutions.</p>
+    <p>Focused on building modern, minimal, and impactful brand experiences through creativity, systems, and execution.</p>
+  </div>
+  <div class="about-visual reveal">
+    <div class="about-quote">
+      Focused on building modern, minimal, and impactful brand experiences through creativity, systems, and execution.
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-eyebrow">Academic Journey</div>
+  <h2 class="section-title">Education &amp;<br><em>Foundations</em></h2>
+  <div class="edu-grid">
+
+    <div class="edu-card reveal">
+      <div class="edu-photo-strip">
+        <div class="photo-slot" id="edu-mba">
+          <div class="placeholder-icon">🎓</div>
+          <div class="placeholder-label">MBA Photo</div>
+        </div>
+      </div>
+      <div class="edu-card-body">
+        <span class="edu-year">2024 — 2027</span>
+        <div class="edu-degree">Master of Business Administration</div>
+        <div class="edu-school">SRM Institute of Science and Technology</div>
+        <span class="edu-badge current">Currently Pursuing</span>
+      </div>
+    </div>
+
+    <div class="edu-card reveal reveal-delay-1">
+      <div class="edu-photo-strip">
+        <div class="photo-slot" id="edu-bcom">
+          <div class="placeholder-icon">🎓</div>
+          <div class="placeholder-label">Graduation Photo</div>
+        </div>
+      </div>
+      <div class="edu-card-body">
+        <span class="edu-year">2021 — 2024</span>
+        <div class="edu-degree">B.Com (General)</div>
+        <div class="edu-school">SRM Institute of Science and Technology — Ramapuram Campus</div>
+        <span class="edu-badge">CGPA: 8.89</span>
+      </div>
+    </div>
+
+    <div class="edu-card reveal reveal-delay-2">
+      <div class="edu-photo-strip">
+        <div class="photo-slot" id="edu-school">
+          <div class="placeholder-icon">📚</div>
+          <div class="placeholder-label">School Photo</div>
+        </div>
+      </div>
+      <div class="edu-card-body">
+        <span class="edu-year">Completed 2021</span>
+        <div class="edu-degree">Higher Secondary Education</div>
+        <div class="edu-school">Hussain Memorial Matriculation Higher Secondary School, Ambattur — Commerce Group</div>
+        <span class="edu-badge">12th: 85% &nbsp;|&nbsp; 10th: 76%</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="lead-header">
+    <div>
+      <div class="section-eyebrow">Leadership</div>
+      <h2 class="section-title">Campus<br><em>Contributions</em></h2>
+      <p class="section-subtitle">Held key leadership roles across cultural, technical, management, and business events throughout undergraduate studies.</p>
+    </div>
+    <div class="lead-contrib reveal">
+      <strong>50+</strong>
+      Events planned and executed during undergraduate studies across cultural, technical, management, and business domains.
+    </div>
+  </div>
+
+  <div class="lead-grid">
+
+    <div class="lead-card reveal">
+      <div class="lead-photo">
+        <div class="photo-slot" id="lead-ceo">
+          <div class="placeholder-icon">👔</div>
+          <div class="placeholder-label">CEO Event Photo</div>
+        </div>
+      </div>
+      <div class="lead-card-body">
+        <div class="lead-event-tag">Commerce Conglomeration</div>
+        <div class="lead-role">CEO</div>
+        <div class="lead-org">Investiture Ceremony · ED Week · ED Pavilion · Entrepreneurial Development Pavilion 2.0</div>
+        <span class="lead-year-tag">2023–24</span>
+      </div>
+    </div>
+
+    <div class="lead-card reveal reveal-delay-1">
+      <div class="lead-photo">
+        <div class="photo-slot" id="lead-digital">
+          <div class="placeholder-icon">💻</div>
+          <div class="placeholder-label">COMMEX'22 Photo</div>
+        </div>
+      </div>
+      <div class="lead-card-body">
+        <div class="lead-event-tag">COMMEX'22</div>
+        <div class="lead-role">Digital Head</div>
+        <div class="lead-org">Commerce Exhibition</div>
+        <span class="lead-year-tag">2022</span>
+      </div>
+    </div>
+
+    <div class="lead-card reveal reveal-delay-2">
+      <div class="lead-photo">
+        <div class="photo-slot" id="lead-president">
+          <div class="placeholder-icon">🏛️</div>
+          <div class="placeholder-label">COMMERZIUM'23 Photo</div>
+        </div>
+      </div>
+      <div class="lead-card-body">
+        <div class="lead-event-tag">COMMERZIUM'23</div>
+        <div class="lead-role">President</div>
+        <div class="lead-org">Commerce Summit</div>
+        <span class="lead-year-tag">2023</span>
+      </div>
+    </div>
+
+    <div class="lead-card reveal">
+      <div class="lead-photo">
+        <div class="photo-slot" id="lead-nss">
+          <div class="placeholder-icon">🤝</div>
+          <div class="placeholder-label">NSS Photo</div>
+        </div>
+      </div>
+      <div class="lead-card-body">
+        <div class="lead-event-tag">NSS</div>
+        <div class="lead-role">Marketing Head</div>
+        <div class="lead-org">National Service Scheme</div>
+        <span class="lead-year-tag">2022–23</span>
+      </div>
+    </div>
+
+    <div class="lead-card reveal reveal-delay-1">
+      <div class="lead-photo">
+        <div class="photo-slot" id="lead-advisor">
+          <div class="placeholder-icon">🌐</div>
+          <div class="placeholder-label">Conference Photo</div>
+        </div>
+      </div>
+      <div class="lead-card-body">
+        <div class="lead-event-tag">International Conference</div>
+        <div class="lead-role">Management Advisor</div>
+        <div class="lead-org">SRM Institute of Science and Technology</div>
+        <span class="lead-year-tag">2023</span>
+      </div>
+    </div>
+
+    <div class="lead-card reveal reveal-delay-2">
+      <div class="lead-photo">
+        <div class="photo-slot" id="lead-merfesta">
+          <div class="placeholder-icon">🎉</div>
+          <div class="placeholder-label">MERFESTA'24 Photo</div>
+        </div>
+      </div>
+      <div class="lead-card-body">
+        <div class="lead-event-tag">MERFESTA'24</div>
+        <div class="lead-role">Head Position</div>
+        <div class="lead-org">Annual Fest</div>
+        <span class="lead-year-tag">2024</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SPEAKING -->
+<section id="speaking">
+  <div class="section-eyebrow">Guest Appearances</div>
+  <h2 class="section-title">Speaking &amp;<br><em>Representation</em></h2>
+  <p class="section-subtitle">Invited as Chief Guest, Alumni Guest, Judge, and Industry Speaker for multiple events and academic programs at SRM Institute of Science and Technology.</p>
+
+  <div class="speaking-grid">
+
+    <div class="speaking-card reveal">
+      <div class="speaking-photo">
+        <div class="photo-slot" id="speak-investiture">
+          <div class="placeholder-icon">🎙️</div>
+          <div class="placeholder-label">Event Photo</div>
+        </div>
+      </div>
+      <div class="speaking-card-body">
+        <div class="speaking-role">Alumni Guest</div>
+        <div class="speaking-event">Investiture Ceremony 2025</div>
+        <div class="speaking-org">SRM Institute of Science and Technology</div>
+      </div>
+    </div>
+
+    <div class="speaking-card reveal reveal-delay-1">
+      <div class="speaking-photo">
+        <div class="photo-slot" id="speak-arthashasthra">
+          <div class="placeholder-icon">🏆</div>
+          <div class="placeholder-label">Event Photo</div>
+        </div>
+      </div>
+      <div class="speaking-card-body">
+        <div class="speaking-role">Chief Guest</div>
+        <div class="speaking-event">Arthashasthra'25</div>
+        <div class="speaking-org">SRM Institute of Science and Technology</div>
+      </div>
+    </div>
+
+    <div class="speaking-card reveal reveal-delay-2">
+      <div class="speaking-photo">
+        <div class="photo-slot" id="speak-freshers">
+          <div class="placeholder-icon">🎓</div>
+          <div class="placeholder-label">Event Photo</div>
+        </div>
+      </div>
+      <div class="speaking-card-body">
+        <div class="speaking-role">Alumni Guest</div>
+        <div class="speaking-event">Freshers Inauguration 2025</div>
+        <div class="speaking-org">SRM Institute of Science and Technology</div>
+      </div>
+    </div>
+
+    <div class="speaking-card reveal">
+      <div class="speaking-photo">
+        <div class="photo-slot" id="speak-lecture">
+          <div class="placeholder-icon">📊</div>
+          <div class="placeholder-label">Lecture Photo</div>
+        </div>
+      </div>
+      <div class="speaking-card-body">
+        <div class="speaking-role">Guest Lecture</div>
+        <div class="speaking-event">Digital Marketing &amp; E-Commerce</div>
+        <div class="speaking-org">SRM Institute of Science and Technology</div>
+      </div>
+    </div>
+
+    <div class="speaking-card reveal reveal-delay-1">
+      <div class="speaking-photo">
+        <div class="photo-slot" id="speak-fusion">
+          <div class="placeholder-icon">⚖️</div>
+          <div class="placeholder-label">Event Photo</div>
+        </div>
+      </div>
+      <div class="speaking-card-body">
+        <div class="speaking-role">Judge</div>
+        <div class="speaking-event">Fusion'26</div>
+        <div class="speaking-org">SRM Institute of Science and Technology</div>
+      </div>
+    </div>
+
+    <div class="speaking-card reveal reveal-delay-2">
+      <div class="speaking-photo">
+        <div class="photo-slot" id="speak-luminex">
+          <div class="placeholder-icon">✨</div>
+          <div class="placeholder-label">Event Photo</div>
+        </div>
+      </div>
+      <div class="speaking-card-body">
+        <div class="speaking-role">Judge</div>
+        <div class="speaking-event">Luminex'26</div>
+        <div class="speaking-org">SRM Institute of Science and Technology</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-eyebrow">Achievements</div>
+  <h2 class="section-title">Recognitions &amp;<br><em>Accolades</em></h2>
+  <div class="ach-grid">
+
+    <div class="ach-item reveal">
+      <div class="ach-photo">
+        <div class="photo-slot" id="ach-best-student">
+          <div class="placeholder-icon">🏆</div>
+          <div class="placeholder-label">Award Photo</div>
+        </div>
+      </div>
+      <div class="ach-item-body">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-title">Best Student of the Year</div>
+      </div>
+    </div>
+
+    <div class="ach-item reveal reveal-delay-1">
+      <div class="ach-photo">
+        <div class="photo-slot" id="ach-regularity">
+          <div class="placeholder-icon">📅</div>
+          <div class="placeholder-label">Award Photo</div>
+        </div>
+      </div>
+      <div class="ach-item-body">
+        <div class="ach-icon">📅</div>
+        <div class="ach-title">Regularity Award — 2 Times</div>
+      </div>
+    </div>
+
+    <div class="ach-item reveal reveal-delay-2">
+      <div class="ach-photo">
+        <div class="photo-slot" id="ach-leadership">
+          <div class="placeholder-icon">🎖️</div>
+          <div class="placeholder-label">Award Photo</div>
+        </div>
+      </div>
+      <div class="ach-item-body">
+        <div class="ach-icon">🎖️</div>
+        <div class="ach-title">Leadership &amp; Event Excellence Awards</div>
+      </div>
+    </div>
+
+    <div class="ach-item reveal reveal-delay-3">
+      <div class="ach-photo">
+        <div class="photo-slot" id="ach-recognition">
+          <div class="placeholder-icon">🌟</div>
+          <div class="placeholder-label">Recognition Photo</div>
+        </div>
+      </div>
+      <div class="ach-item-body">
+        <div class="ach-icon">🌟</div>
+        <div class="ach-title">Multiple Leadership Role Recognitions</div>
+      </div>
+    </div>
+
+    <div class="ach-item reveal reveal-delay-4">
+      <div class="ach-photo">
+        <div class="photo-slot" id="ach-cofounder">
+          <div class="placeholder-icon">🤝</div>
+          <div class="placeholder-label">Co-Founder Photo</div>
+        </div>
+      </div>
+      <div class="ach-item-body">
+        <div class="ach-icon">🤝</div>
+        <div class="ach-title">Honoured as Co-Founder, Commerce Conglomeration</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ELEVATE HUB -->
+<section id="elevate">
+  <div class="elevate-bg"></div>
+  <div class="elevate-inner">
+    <div class="section-eyebrow">Building Elevate Hub</div>
+    <h2 class="section-title">One Destination.<br><em>Infinite</em> Brand Possibilities.</h2>
+    <p class="elevate-hero-text">Founded in 2023 with a vision to help businesses grow through every dimension of brand presence.</p>
+    <p class="elevate-highlight">
+      <span>DIGITAL PRESENCE</span> &nbsp;·&nbsp; <span>OFFLINE BRANDING</span> &nbsp;·&nbsp; <span>EXPERIENTIAL BRANDING</span><br>ALL UNDER ONE DESTINATION.
+    </p>
+    <div class="services-grid">
+      <div class="service-col reveal">
+        <div class="service-cat">01 — Digital</div>
+        <h3>Digital Marketing</h3>
+        <ul class="service-items">
+          <li>Social Media Management &amp; SMM</li>
+          <li>Content Creation</li>
+          <li>Photography &amp; Videography</li>
+          <li>Performance Marketing</li>
+          <li>Website Development &amp; SEO</li>
+          <li>Software Development</li>
+          <li>App Development</li>
+          <li>Brand Strategy</li>
+        </ul>
+      </div>
+      <div class="service-col reveal reveal-delay-1">
+        <div class="service-cat">02 — Offline</div>
+        <h3>Offline Branding</h3>
+        <ul class="service-items">
+          <li>Signages &amp; Displays</li>
+          <li>Retail Branding</li>
+          <li>Vinyl Branding</li>
+          <li>Rotary Branding Systems ★</li>
+          <li>Interior &amp; Ambience</li>
+          <li>Building Elevation</li>
+          <li>In-House Manufacturing</li>
+        </ul>
+      </div>
+      <div class="service-col reveal reveal-delay-2">
+        <div class="service-cat">03 — Events</div>
+        <h3>Event Branding</h3>
+        <ul class="service-items">
+          <li>Festival Branding</li>
+          <li>Corporate Event Branding</li>
+          <li>Experiential Setups</li>
+          <li>Stage &amp; Venue Branding</li>
+          <li>Customized Installations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-eyebrow">Impact</div>
+  <h2 class="section-title">Numbers That<br><em>Speak</em></h2>
+  <div class="impact-nums">
+    <div class="impact-item reveal"><span class="impact-num">40+</span><span class="impact-label">Clients</span></div>
+    <div class="impact-item reveal reveal-delay-1"><span class="impact-num">300+</span><span class="impact-label">Projects</span></div>
+    <div class="impact-item reveal reveal-delay-2"><span class="impact-num">2000+</span><span class="impact-label">Digital Creatives</span></div>
+    <div class="impact-item reveal reveal-delay-3"><span class="impact-num">3+</span><span class="impact-label">Years Experience</span></div>
+    <div class="impact-item reveal reveal-delay-4"><span class="impact-num">50+</span><span class="impact-label">Events Managed</span></div>
+    <div class="impact-item reveal"><span class="impact-num">∞</span><span class="impact-label">Industries Served</span></div>
+  </div>
+</section>
+
+<!-- BUILDING -->
+<section id="building">
+  <div>
+    <div class="building-badge">Currently Building</div>
+    <h2 class="building-brand">Anugraha Niketan<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text-light);font-size:1.2rem;font-weight:300;">A New Venture</em></h2>
+    <br>
+    <p class="building-desc">A premium divine lifestyle and decor brand focused on spiritually inspired aesthetics, traditional elegance, and modern presentation. Where heritage meets contemporary design.</p>
+  </div>
+  <div class="building-visual reveal"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-eyebrow">Let's Connect</div>
+    <h2 class="section-title">Let's Build Something<br><em>Meaningful.</em></h2>
+    <p class="contact-tagline">Open to collaborations, brand projects, and meaningful conversations.</p>
+    <div class="contact-links">
+      <a class="contact-item" href="https://www.instagram.com/sanjayvelmurugan_" target="_blank">
+        <span class="contact-icon" aria-hidden="true">📷</span>
+        <span class="contact-type">Instagram</span>
+        <span class="contact-val">@sanjayvelmurugan_</span>
+      </a>
+      <a class="contact-item" href="https://wa.me/919025876399" target="_blank">
+        <span class="contact-icon" aria-hidden="true">💬</span>
+        <span class="contact-type">WhatsApp</span>
+        <span class="contact-val">+91 90258 76399</span>
+      </a>
+      <a class="contact-item" href="https://wa.me/919500060906" target="_blank">
+        <span class="contact-icon" aria-hidden="true">💬</span>
+        <span class="contact-type">WhatsApp</span>
+        <span class="contact-val">+91 95000 60906</span>
+      </a>
+      <a class="contact-item" href="https://www.elevatehub.in" target="_blank">
+        <span class="contact-icon" aria-hidden="true">🌐</span>
+        <span class="contact-type">Website</span>
+        <span class="contact-val">elevatehub.in</span>
+      </a>
+    </div>
+    <div class="contact-divider"></div>
+    <p class="footer-tagline">Creating modern brand experiences through strategy, creativity, and execution.</p>
+    <p class="footer-copy">© 2026 Sanjay V · Elevate Hub</p>
+  </div>
+</section>
+
+<!-- GALLERY LIGHTBOX MODAL -->
+<div class="gallery-modal" id="galleryModal">
+  <button class="gallery-close" onclick="closeGallery()">✕</button>
+  <div class="gallery-counter">
+    <span id="currentSlide">1</span> / <span id="totalSlides">0</span>
+  </div>
+  <div class="gallery-container">
+    <div id="gallerySlides"></div>
+    <div class="gallery-nav">
+      <button onclick="previousSlide()">‹</button>
+      <button onclick="nextSlide()">›</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ─── GALLERY SYSTEM ───
+  let galleryImages = [];
+  let currentSlideIndex = 0;
+
+  function openGallery(imageArray, startIndex = 0) {
+    galleryImages = imageArray.filter(img => img && img.trim() !== '');
+    if (galleryImages.length === 0) return;
+
+    currentSlideIndex = startIndex;
+    const modal = document.getElementById('galleryModal');
+    const slidesContainer = document.getElementById('gallerySlides');
+
+    slidesContainer.innerHTML = galleryImages.map((img, idx) =>
+      `<div class="gallery-slide ${idx === startIndex ? 'active' : ''}"><img src="${img}" alt="Gallery image"></div>`
+    ).join('');
+
+    document.getElementById('totalSlides').textContent = galleryImages.length;
+    updateCounter();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery() {
+    document.getElementById('galleryModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  function nextSlide() {
+    if (galleryImages.length === 0) return;
+    currentSlideIndex = (currentSlideIndex + 1) % galleryImages.length;
+    updateGallerySlide();
+  }
+
+  function previousSlide() {
+    if (galleryImages.length === 0) return;
+    currentSlideIndex = (currentSlideIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateGallerySlide();
+  }
+
+  function updateGallerySlide() {
+    const slides = document.querySelectorAll('.gallery-slide');
+    slides.forEach((slide, idx) => {
+      slide.classList.toggle('active', idx === currentSlideIndex);
+    });
+    updateCounter();
+  }
+
+  function updateCounter() {
+    document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('galleryModal');
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'ArrowRight') nextSlide();
+    if (e.key === 'ArrowLeft') previousSlide();
+    if (e.key === 'Escape') closeGallery();
+  });
+
+  // Close on background click
+  document.getElementById('galleryModal').addEventListener('click', (e) => {
+    if (e.target.id === 'galleryModal') closeGallery();
+  });
+
+
+  // ── Apply images: show photo strip if image provided, hide strip if not ──
+  function applyImages() {
+    if (IMAGES.profile) {
+      const el = document.getElementById('profilePhotoEl');
+      if (el) el.innerHTML = `<img src="${IMAGES.profile}" alt="Sanjay V" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;" onerror="this.parentElement.innerHTML='<div class=flip-front-initials>SV</div>'">`;
+    }
+
+    // Smart setter: if src → show image; if empty → hide the whole photo strip parent
+    const set = (slotId, src) => {
+      const slot = document.getElementById(slotId);
+      if (!slot) return;
+      // Find the closest photo-strip container
+      const strip = slot.closest('.edu-photo-strip, .lead-photo, .speaking-photo, .ach-photo');
+      if (!src) {
+        if (strip) strip.style.display = 'none';
+        return;
+      }
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top center;display:block;';
+      img.onerror = () => { if (strip) strip.style.display = 'none'; };
+      slot.innerHTML = '';
+      slot.appendChild(img);
+
+      // Make clickable for gallery
+      const photoSlot = slot.closest('.photo-slot');
+      if (photoSlot) {
+        photoSlot.classList.add('clickable');
+        photoSlot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const section = strip.closest('section');
+          if (section) {
+            const sectionId = section.id;
+            const images = getImagesForSection(sectionId);
+            const currentIndex = images.indexOf(src);
+            openGallery(images, Math.max(0, currentIndex));
+          }
+        });
+      }
+    };
+
+    function getImagesForSection(sectionId) {
+      const images = [];
+      switch(sectionId) {
+        case 'education':
+          if (IMAGES.graduation_mba) images.push(IMAGES.graduation_mba);
+          if (IMAGES.graduation_bcom) images.push(IMAGES.graduation_bcom);
+          if (IMAGES.graduation_school) images.push(IMAGES.graduation_school);
+          break;
+        case 'leadership':
+          Object.values(IMAGES.leadership).forEach(img => { if (img) images.push(img); });
+          break;
+        case 'speaking':
+          Object.values(IMAGES.speaking).forEach(img => { if (img) images.push(img); });
+          break;
+        case 'achievements':
+          Object.values(IMAGES.achievements).forEach(img => { if (img) images.push(img); });
+          break;
+      }
+      return images;
+    }
+
+    // Education — only B.Com has a photo
+    set('edu-mba',    IMAGES.graduation_mba);
+    set('edu-bcom',   IMAGES.graduation_bcom);
+    set('edu-school', IMAGES.graduation_school);
+
+    // Leadership
+    set('lead-ceo',       IMAGES.leadership.commerce_ceo);
+    set('lead-digital',   IMAGES.leadership.digital_head);
+    set('lead-president', IMAGES.leadership.president);
+    set('lead-nss',       IMAGES.leadership.nss_marketing);
+    set('lead-advisor',   IMAGES.leadership.mgmt_advisor);
+    set('lead-merfesta',  IMAGES.leadership.merfesta);
+
+    // Achievements
+    set('ach-best-student', IMAGES.achievements.best_student);
+    set('ach-regularity',   IMAGES.achievements.regularity);
+    set('ach-leadership',   IMAGES.achievements.leadership_exc);
+    set('ach-recognition',  IMAGES.achievements.recognitions);
+    set('ach-cofounder',    IMAGES.achievements.co_founder);
+
+    // Speaking
+    set('speak-investiture',   IMAGES.speaking.investiture_2025);
+    set('speak-arthashasthra', IMAGES.speaking.arthashasthra);
+    set('speak-freshers',      IMAGES.speaking.freshers_2025);
+    set('speak-lecture',       IMAGES.speaking.guest_lecture);
+    set('speak-fusion',        IMAGES.speaking.fusion26);
+    set('speak-luminex',       IMAGES.speaking.luminex26);
+  }
+  applyImages();
+
+  // ── Scroll reveal ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── Nav shrink ──
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 50 ? '1rem 4rem' : '1.5rem 4rem';
+  });
+</script>
+
+</body>
+</html>
