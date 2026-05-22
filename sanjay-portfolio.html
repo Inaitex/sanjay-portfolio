@@ -4,410 +4,317 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sanjay V — Creative Strategist & Founder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 
+  Nexa → Nunito (geometric, clean, thin/regular/bold weights) 
+  Bank Gothic → Oswald (condensed all-caps labels)
+  Amsterdam One / Croogla → Dancing Script (elegant script accent)
+  Display bold → Raleway ExtraBold (heading weight)
+-->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,300&family=Oswald:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,700;0,800;1,300&display=swap" rel="stylesheet">
 
 <script>
-// ═══════════════════════════════════════════════════════════
-//  📸  IMAGE CONFIGURATION  —  edit only this section
-//  Rules:
-//    • Use forward slashes:  "folder/file.jpg"
-//    • Path is relative to the HTML file location
-//    • Leave as "" if you have no photo for that slot
-//    • For galleries add as many paths as you have images
-// ═══════════════════════════════════════════════════════════
-const GALLERY_IMAGES = {
+  // ═══════════════════════════════════════════════
+  //  📸 ADD YOUR FOLDER IMAGES HERE
+  //  Use relative paths from where the HTML file is
+  //  e.g. "Campus Contributions/photo1.jpg"
+  //  Add as many images as you have per section
+  // ═══════════════════════════════════════════════
+  const GALLERY_IMAGES = {
+    profile: "images\\Profile picture\\profile picture.png",   // single photo for flip card front
 
-  // ── Flip card profile photo ──────────────────────────────
-  profile: "",
-  // e.g. profile: "photos/sanjay.jpg",
+    // B.Com graduation — add your actual filenames
+    graduation_bcom:   "",
+    graduation_mba:    "",
+    graduation_school: "",
 
-  // ── Education photos ─────────────────────────────────────
-  graduation_bcom:   "",
-  graduation_mba:    "",
-  graduation_school: "",
-  // e.g. graduation_bcom: "Graduation/bcom.jpg",
+    // Campus Contributions — add all folder images
+    leadership: [
+      "images/Leadership & campus Contributions/CEO - Commerce Conglomeration/Investiture Ceremony/1778940049349.JPG",
+      "images/Leadership & campus Contributions/CEO - Commerce Conglomeration/Investiture Ceremony/1778940049409.JPG",
+      "images/Leadership & campus Contributions/Digital Head - COMMEX 22/1778940048767.jpg",
+      "images/Leadership & campus Contributions/MERFESTA_24/1778940049692.jpg",
+      "images/Leadership & campus Contributions/Marketing Head - NSS/1778940048942.jpg",
+      "images/Leadership & campus Contributions/President - COMMERZIUM 23/1778940049994.JPG"
+      // "Campus Contributions/img1.jpg",
+      // "Campus Contributions/img2.jpg",
+    ],
 
-  // ── Campus Contributions gallery (add all images) ────────
-  leadership: [
-    // "Campus Contributions/img1.jpg",
-    // "Campus Contributions/img2.jpg",
-    // "Campus Contributions/img3.jpg",
-  ],
+    // Speaking & Representation — add all folder images
+    speaking: [
+      "images/Guest Appearances & Speaking/Alumni Guest for - C2 - Investiture Ceremony 2025/Honoured as Co founder of C2 association.jpg",
+      "images/Guest Appearances & Speaking/Alumni Guest for Freshers inauguration year 2025/IMG-20260517-WA0005.jpg",
+      "images/Guest Appearances & Speaking/Chief Guest For Arthashasthra_25/1778940049337.JPG",
+      "images/Guest Appearances & Speaking/Judge for Fusion 26/IMG_20260517_101909_919.jpg",
+      "images/Guest Appearances & Speaking/Judge for luminex_26/IMG-20260330-WA0046.jpg"
+      // "Speaking/img1.jpg",
+      // "Speaking/img2.jpg",
+    ],
 
-  // ── Speaking & Representation gallery ────────────────────
-  speaking: [
-    // "Speaking/img1.jpg",
-    // "Speaking/img2.jpg",
-  ],
-
-  // ── Recognitions & Accolades gallery ─────────────────────
-  achievements: [
-    // "Achievements/img1.jpg",
-    // "Achievements/img2.jpg",
-  ],
-};
-// ═══════════════════════════════════════════════════════════
-//  END OF CONFIG  —  do not edit below this line
-// ═══════════════════════════════════════════════════════════
-
-document.addEventListener('DOMContentLoaded', function () {
-
-  // ── 1. PROFILE PHOTO ──────────────────────────────────────
-  if (GALLERY_IMAGES.profile) {
-    const el = document.getElementById('profilePhotoEl');
-    if (el) {
-      el.innerHTML = '';
-      const img = new Image();
-      img.alt = 'Sanjay V';
-      img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top center;display:block;';
-      img.onerror = function () { el.innerHTML = '<div class="flip-front-initials">SV</div>'; };
-      img.src = GALLERY_IMAGES.profile;   // src set LAST so onerror fires correctly
-      el.appendChild(img);
-    }
-  }
-
-  // ── 2. EDUCATION PHOTOS ───────────────────────────────────
-  var eduMap = {
-    'edu-bcom':   GALLERY_IMAGES.graduation_bcom,
-    'edu-mba':    GALLERY_IMAGES.graduation_mba,
-    'edu-school': GALLERY_IMAGES.graduation_school,
+    // Recognitions & Accolades — add all folder images
+    achievements: [
+      "images/Achievements & Recognitions/Best Student Award/IMG_20260517_102436.jpg",
+      "images/Achievements & Recognitions/Commerzium 23/1778940049046.jpg",
+      "images/Achievements & Recognitions/ED Pavilion 24/1778940050944.JPG",
+      "images/Achievements & Recognitions/MERFESTA_24/IMG_20260517_102601.jpg",
+      "images/Achievements & Recognitions/Regularity award/IMG_20260517_102842.jpg"
+      // "Achievements/img1.jpg",
+      // "Achievements/img2.jpg",
+    ],
   };
-  Object.keys(eduMap).forEach(function (id) {
-    var src  = eduMap[id];
-    var slot = document.getElementById(id);
-    if (!slot) return;
-    var strip = slot.closest('.edu-photo-strip');
-    if (!src) {
-      if (strip) strip.style.display = 'none';
-      return;
-    }
-    slot.innerHTML = '';
-    var img = new Image();
-    img.alt   = '';
-    img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top center;display:block;';
-    img.onerror = function () { if (strip) strip.style.display = 'none'; };
-    img.src = src;
-    slot.appendChild(img);
-  });
 
-  // ── 3. GALLERY BUILDER ────────────────────────────────────
-  function buildGallery(stageId, dotsId, imgPaths) {
-    var stage    = document.getElementById(stageId);
-    var dotsWrap = document.getElementById(dotsId);
-    if (!stage || !dotsWrap) return;
+  // ───────────────────────────────────────────────
+  //  GALLERY ENGINE
+  // ───────────────────────────────────────────────
+  const galleries = {};
 
-    var templateSlides = Array.from(stage.querySelectorAll('.gallery-slide'));
-    var finalSlides    = [];
+  function buildGallery(stageId, dotsId, imgArray, slides) {
+    const stage = document.getElementById(stageId);
+    const dotsWrap = document.getElementById(dotsId);
+    if (!stage) return;
 
-    if (imgPaths && imgPaths.length > 0) {
-      // ── We have real images: build one slide per image ──
-      // Keep first template slide structure, replicate for each image
-      imgPaths.forEach(function (src, i) {
-        var slide;
-        if (i < templateSlides.length) {
-          slide = templateSlides[i];
-        } else {
-          // Clone the first slide for extra images
-          slide = templateSlides[0].cloneNode(true);
+    // If we have photos, inject them into existing slides
+    // If more photos than slides, create new slides
+    const allSlides = Array.from(stage.querySelectorAll('.gallery-slide'));
+
+    if (imgArray && imgArray.length > 0) {
+      // Inject images into slides (lazy loaded)
+      imgArray.forEach((src, i) => {
+        let slide = allSlides[i];
+        if (!slide) {
+          // Clone structure from first slide for extra images
+          slide = allSlides[0].cloneNode(true);
           slide.classList.remove('active');
           stage.appendChild(slide);
+          allSlides.push(slide);
         }
-
-        // Replace the img-wrap content with the real image
-        var wrap = slide.querySelector('.gallery-img-wrap');
+        const wrap = slide.querySelector('.gallery-img-wrap');
         if (wrap) {
+          // Replace no-img placeholder with lazy img
           wrap.innerHTML = '';
-          var img = new Image();
-          img.alt   = '';
-          img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:center top;display:block;opacity:0;transition:opacity 0.55s ease;';
-          img.onload  = function () { this.style.opacity = '1'; };
-          img.onerror = function () {
-            wrap.innerHTML = '<div class="gallery-no-img"><span class="gni-icon">📷</span><span class="gni-text">Photo</span></div>';
-          };
-          // Attach to DOM BEFORE setting src so load event fires reliably
+          const img = document.createElement('img');
+          img.dataset.src = src;
+          img.alt = '';
+          img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:center top;display:block;opacity:0;transition:opacity 0.5s ease;';
+          img.onerror = () => { wrap.innerHTML = `<div class="gallery-no-img"><span class="gni-icon">📷</span></div>`; };
           wrap.appendChild(img);
-          img.src = src;
         }
-        finalSlides.push(slide);
       });
-
-      // Hide any leftover template slides that have no image
-      templateSlides.forEach(function (sl, i) {
-        if (i >= imgPaths.length) sl.style.display = 'none';
-      });
-
-    } else {
-      // ── No images: keep the default text-only slides ──
-      finalSlides = templateSlides;
     }
 
-    // Make sure only first slide is active
-    finalSlides.forEach(function (sl, i) {
-      sl.classList.toggle('active', i === 0);
-      sl.style.opacity   = i === 0 ? '1' : '0';
-      sl.style.transform = 'translateX(0)';
-    });
-
-    var current = 0;
+    const finalSlides = Array.from(stage.querySelectorAll('.gallery-slide'));
+    let current = 0;
 
     // Build dots
     dotsWrap.innerHTML = '';
-    finalSlides.forEach(function (_, i) {
-      var dot = document.createElement('div');
+    finalSlides.forEach((_, i) => {
+      const dot = document.createElement('div');
       dot.className = 'gdot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', function () { goTo(i, 'next'); });
+      dot.addEventListener('click', () => goTo(i));
       dotsWrap.appendChild(dot);
     });
 
-    function updateDots() {
-      dotsWrap.querySelectorAll('.gdot').forEach(function (d, i) {
-        d.classList.toggle('active', i === current);
-      });
+    function lazyLoad(idx) {
+      const sl = finalSlides[idx];
+      if (!sl) return;
+      const img = sl.querySelector('img[data-src]');
+      if (img) {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+        img.onload = () => img.classList.add('loaded');
+      }
     }
 
     function goTo(next, dir) {
-      if (next === current || finalSlides.length < 2) return;
-      var prev = current;
-      current  = next;
+      if (next === current) return;
+      const prev = current;
+      current = next;
 
-      var outX = dir === 'next' ? '-60px' : '60px';
-      var inX  = dir === 'next' ?  '60px' : '-60px';
+      // Preload adjacent
+      // lazyLoad(current);
+      // lazyLoad((current + 1) % finalSlides.length);
 
-      // Slide out
+      // Animate out
+      finalSlides[prev].classList.remove('active');
       finalSlides[prev].style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-      finalSlides[prev].style.opacity    = '0';
-      finalSlides[prev].style.transform  = 'translateX(' + outX + ')';
+      finalSlides[prev].style.opacity = '0';
+      finalSlides[prev].style.transform = dir === 'next' ? 'translateX(-50px)' : 'translateX(50px)';
 
-      // Prepare incoming slide off-screen
+      // Animate in
       finalSlides[current].style.transition = 'none';
-      finalSlides[current].style.opacity    = '0';
-      finalSlides[current].style.transform  = 'translateX(' + inX + ')';
-      finalSlides[current].classList.add('active');
+      finalSlides[current].style.opacity = '0';
+      finalSlides[current].style.transform = dir === 'next' ? 'translateX(50px)' : 'translateX(-50px)';
 
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          finalSlides[current].classList.add('active');
           finalSlides[current].style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-          finalSlides[current].style.opacity    = '1';
-          finalSlides[current].style.transform  = 'translateX(0)';
+          finalSlides[current].style.opacity = '1';
+          finalSlides[current].style.transform = 'translateX(0)';
+
+          setTimeout(() => {
+            finalSlides[prev].style.transition = '';
+            finalSlides[prev].style.opacity = '';
+            finalSlides[prev].style.transform = '';
+          }, 480);
         });
       });
 
-      // Clean up outgoing after animation
-      setTimeout(function () {
-        finalSlides[prev].classList.remove('active');
-        finalSlides[prev].style.transition = '';
-        finalSlides[prev].style.opacity    = '';
-        finalSlides[prev].style.transform  = '';
-      }, 500);
-
-      updateDots();
+      // Update dots
+      dotsWrap.querySelectorAll('.gdot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
 
-    function nextSlide() { goTo((current + 1) % finalSlides.length, 'next'); }
-    function prevSlide() { goTo((current - 1 + finalSlides.length) % finalSlides.length, 'prev'); }
+    function next() { goTo((current + 1) % finalSlides.length, 'next'); }
+    function prev() { goTo((current - 1 + finalSlides.length) % finalSlides.length, 'prev'); }
 
-    // Auto-play
-    var timer = setInterval(nextSlide, 4000);
-    stage.addEventListener('mouseenter', function () { clearInterval(timer); });
-    stage.addEventListener('mouseleave', function () { timer = setInterval(nextSlide, 4000); });
+    // Auto-advance every 4s
+    let timer = setInterval(next, 4000);
+    stage.addEventListener('mouseenter', () => clearInterval(timer));
+    stage.addEventListener('mouseleave', () => { timer = setInterval(next, 4000); });
 
     // Touch swipe
-    var touchStartX = 0;
-    stage.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
-    stage.addEventListener('touchend',   function (e) {
-      var diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 40) { clearInterval(timer); diff > 0 ? nextSlide() : prevSlide(); timer = setInterval(nextSlide, 4000); }
-    }, { passive: true });
+    let touchX = 0;
+    stage.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+    stage.addEventListener('touchend', e => {
+      const diff = touchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) diff > 0 ? next() : prev();
+    }, {passive:true});
 
-    // Arrow buttons
-    var wrap = stage.closest('.gallery-wrap');
+    // Keyboard (when hovering)
+    stage.setAttribute('tabindex', '0');
+    stage.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    // Wire nav buttons
+    const wrap = stage.closest('.gallery-wrap');
     if (wrap) {
-      var btnPrev = wrap.querySelector('.gallery-prev');
-      var btnNext = wrap.querySelector('.gallery-next');
-      if (btnPrev) btnPrev.addEventListener('click', function () { clearInterval(timer); prevSlide(); timer = setInterval(nextSlide, 4000); });
-      if (btnNext) btnNext.addEventListener('click', function () { clearInterval(timer); nextSlide(); timer = setInterval(nextSlide, 4000); });
+      wrap.querySelector('.gallery-prev')?.addEventListener('click', () => { clearInterval(timer); prev(); timer = setInterval(next, 4000); });
+      wrap.querySelector('.gallery-next')?.addEventListener('click', () => { clearInterval(timer); next(); timer = setInterval(next, 4000); });
     }
 
-    // Keyboard
-    stage.setAttribute('tabindex', '0');
-    stage.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft')  prevSlide();
+    galleries[stageId] = { goTo, next, prev };
+
+    // Load first slide immediately
+    lazyLoad(0);
+  }
+
+  // ───────────────────────────────────────────────
+  //  APPLY PROFILE + EDU IMAGES
+  // ───────────────────────────────────────────────
+  function applyStaticImages() {
+    // Profile card front
+    if (GALLERY_IMAGES.profile) {
+      const el = document.getElementById('profilePhotoEl');
+      if (el) {
+        const img = document.createElement('img');
+        img.src = GALLERY_IMAGES.profile;
+        img.alt = 'Sanjay V';
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top center;display:block;';
+        img.onerror = () => { el.innerHTML = '<div class="flip-front-initials">SV</div>'; };
+        el.innerHTML = '';
+        el.appendChild(img);
+      }
+    }
+
+    // Education strips
+    const eduMap = {
+      'edu-mba':    GALLERY_IMAGES.graduation_mba,
+      'edu-bcom':   GALLERY_IMAGES.graduation_bcom,
+      'edu-school': GALLERY_IMAGES.graduation_school,
+    };
+    Object.entries(eduMap).forEach(([id, src]) => {
+      const slot = document.getElementById(id);
+      if (!slot) return;
+      const strip = slot.closest('.edu-photo-strip');
+      if (!src) { if (strip) strip.style.display = 'none'; return; }
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top center;display:block;';
+      img.onerror = () => { if (strip) strip.style.display = 'none'; };
+      slot.innerHTML = '';
+      slot.appendChild(img);
     });
   }
 
-  // ── 4. INIT GALLERIES ─────────────────────────────────────
-  buildGallery('leadGallery',  'leadDots',  GALLERY_IMAGES.leadership);
-  buildGallery('speakGallery', 'speakDots', GALLERY_IMAGES.speaking);
-  buildGallery('achGallery',   'achDots',   GALLERY_IMAGES.achievements);
+  // ───────────────────────────────────────────────
+  //  INIT ON DOM READY
+  // ───────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
 
-  // ── 5. SCROLL REVEAL ──────────────────────────────────────
-  var reveals    = document.querySelectorAll('.reveal');
-  var revealObs  = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-  reveals.forEach(function (el) { revealObs.observe(el); });
+    applyStaticImages();
 
-  // ── 6. NAV SHRINK ─────────────────────────────────────────
-  var nav = document.querySelector('nav');
-  window.addEventListener('scroll', function () {
-    var mobile = window.innerWidth < 900;
-    nav.style.padding = window.scrollY > 60
-      ? (mobile ? '0.6rem 1rem' : '0.8rem 4rem')
-      : (mobile ? '1rem 1.5rem' : '1.5rem 4rem');
-  }, { passive: true });
+    // Build all three galleries
+    buildGallery('leadGallery',  'leadDots',  GALLERY_IMAGES.leadership,  null);
+    buildGallery('speakGallery', 'speakDots', GALLERY_IMAGES.speaking,    null);
+    buildGallery('achGallery',   'achDots',   GALLERY_IMAGES.achievements, null);
 
-  // ── 7. MOBILE HAMBURGER ───────────────────────────────────
-  var hamburger = document.getElementById('hamburger');
-  if (hamburger) {
-    hamburger.addEventListener('click', function () { nav.classList.toggle('menu-open'); });
-    document.querySelectorAll('.nav-links a').forEach(function (a) {
-      a.addEventListener('click', function () { nav.classList.remove('menu-open'); });
-    });
-  }
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => revealObs.observe(el));
 
-  // ── 8. TAP TO FLIP (mobile) ───────────────────────────────
-  var flipWrapper = document.querySelector('.flip-card-wrapper');
-  if (flipWrapper) {
-    var moved = false;
-    flipWrapper.addEventListener('touchstart', function ()  { moved = false; }, { passive: true });
-    flipWrapper.addEventListener('touchmove',  function ()  { moved = true;  }, { passive: true });
-    flipWrapper.addEventListener('touchend',   function ()  { if (!moved) flipWrapper.classList.toggle('tapped'); });
-  }
+    // ── Nav shrink on scroll ──
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.padding = window.scrollY > 60
+        ? (window.innerWidth < 900 ? '0.7rem 1rem' : '0.8rem 4rem')
+        : (window.innerWidth < 900 ? '1rem 1.5rem' : '1.5rem 4rem');
+    }, { passive: true });
 
-});
+    // ── Mobile hamburger ──
+    const hamburger = document.getElementById('hamburger');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => nav.classList.toggle('menu-open'));
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => nav.classList.remove('menu-open'));
+      });
+    }
+
+    // ── Tap to flip on touch devices ──
+    const flipWrapper = document.querySelector('.flip-card-wrapper');
+    if (flipWrapper) {
+      let touchMoved = false;
+      flipWrapper.addEventListener('touchstart', () => { touchMoved = false; }, { passive: true });
+      flipWrapper.addEventListener('touchmove', () => { touchMoved = true; }, { passive: true });
+      flipWrapper.addEventListener('touchend', () => {
+        if (!touchMoved) flipWrapper.classList.toggle('tapped');
+      });
+    }
+  });
 </script>
 
 <style>
-
-  /* ══════════════════════════════════════════════════
-     LOCAL BRAND FONTS  —  all files inside /fonts/
-     ══════════════════════════════════════════════════ */
-
-  /* Nexa — body / UI text */
-  @font-face {
-    font-family: 'Nexa';
-    src: url('fonts/Nexa-ExtraLight.ttf') format('truetype');
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Nexa';
-    src: url('fonts/Nexa-Heavy.ttf') format('truetype');
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  /* Bank Gothic — condensed all-caps labels */
-  @font-face {
-    font-family: 'BankGothic';
-    src: url('fonts/Bank Gothic Light Regular.otf') format('opentype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'BankGothic';
-    src: url('fonts/BankGothic Md BT.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'BankGothic';
-    src: url('fonts/bank gothic medium bt.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'BankGothic';
-    src: url('fonts/BankGothic Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  /* Croogla 4F — script / decorative accent */
-  @font-face {
-    font-family: 'Croogla';
-    src: url('fonts/fonnts.com-croogla_4f-extralight.otf') format('opentype');
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Croogla';
-    src: url('fonts/fonnts.com-croogla_4f-light.otf') format('opentype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Croogla';
-    src: url('fonts/fonnts.com-croogla_4f-regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Croogla';
-    src: url('fonts/fonnts.com-croogla_4f-medium.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Croogla';
-    src: url('fonts/fonnts.com-croogla_4f-bold.otf') format('opentype');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  /* Amsterdam One — elegant display accent */
-  @font-face {
-    font-family: 'AmsterdamOne';
-    src: url('fonts/AmsterdamOne-eZ12l.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  /* ══════════════════════════════════════════════════
-     CSS VARIABLES
-     ══════════════════════════════════════════════════ */
   :root {
-    /* ── Brand Colors ── */
-    --teal-deep:    #0A3C39;
-    --teal-dark:    #1F5E5A;
-    --teal-mid:     #457A75;
-    --teal-light:   #6A9E9A;
-    --teal-pale:    #c2d8d6;
-    --cream:        #FFFAED;
-    --cream-dark:   #f5f0df;
-    --gold:         #C9A55A;
-    --gold-light:   #e8d5a0;
-    --text-dark:    #0A3C39;
-    --text-mid:     #1F5E5A;
-    --text-body:    #2a4644;
-    --text-light:   #5a8480;
-    --text-on-dark: #FFFAED;
-    --border:       rgba(31,94,90,0.13);
-    --border-dark:  rgba(10,60,57,0.2);
-    --warm-white:   #FFFAED;
+    /* ── Elevate Hub Brand Colors (from PDF) ── */
+    --teal-deep:   #0A3C39;
+    --teal-dark:   #1F5E5A;
+    --teal-mid:    #457A75;
+    --teal-light:  #6A9E9A;
+    --teal-pale:   #c2d8d6;
+    --cream:       #FFFAED;
+    --cream-dark:  #f5f0df;
+    --gold:        #C9A55A;
+    --gold-light:  #e8d5a0;
+    --text-dark:   #0A3C39;
+    --text-mid:    #1F5E5A;
+    --text-body:   #2a4644;
+    --text-light:  #5a8480;
+    --text-on-dark:#FFFAED;
+    --border:      rgba(31,94,90,0.13);
+    --border-dark: rgba(10,60,57,0.2);
+    --warm-white:  #FFFAED;
 
-    /* ── Brand Fonts ──
-       Nexa          → body text, paragraphs, UI
-       BankGothic    → ALL-CAPS labels, eyebrows, nav, buttons
-       Croogla       → taglines, quotes, italic accents
-       AmsterdamOne  → hero display titles, big headings
-    ── */
-    --font-body:    'Nexa', 'Nunito', sans-serif;
-    --font-display: 'AmsterdamOne', 'Nexa', sans-serif;
-    --font-label:   'BankGothic', 'Oswald', sans-serif;
-    --font-script:  'Croogla', 'Dancing Script', cursive;
+    /* ── Brand Fonts ── */
+    --font-body:    'Nunito', sans-serif;          /* Nexa → Nunito: body, UI, labels */
+    --font-display: 'Raleway', sans-serif;         /* Nexa Bold display → Raleway: hero titles */
+    --font-label:   'Oswald', sans-serif;          /* Bank Gothic → Oswald: all-caps tags, section eyes */
+    --font-script:  'Dancing Script', cursive;     /* Croogla / Amsterdam One → Dancing Script: accents */
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -418,79 +325,27 @@ document.addEventListener('DOMContentLoaded', function () {
     overflow-x: hidden;
   }
 
-  /* ══════════════════════════════════════════════
-     FONT ROLE ASSIGNMENTS  —  per brand sheet
-     ══════════════════════════════════════════════
+  /* ── Nexa (Nunito) — body, descriptions, cards */
+  p, li, .hero-desc, .about-text p, .building-desc,
+  .service-items li, .card-bio, .ccard-val,
+  .edu-school, .lead-org, .gcap-detail { font-family: var(--font-body); }
 
-     AmsterdamOne  → LARGE display only: hero h1, section h2 titles
-                     big, prominent headings — NOT body, NOT labels
-     Croogla       → elegant script italics: em words, taglines, quotes
-     BankGothic    → ALL-CAPS condensed: labels, eyebrows, nav, buttons, tags
-     Nexa          → everything else: body, descriptions, UI, cards
-  ══════════════════════════════════════════════ */
+  /* ── Raleway — large display headings */
+  h1, h2, h3, .hero-name, .section-title, .building-brand,
+  .card-name, .elevate-hero-text { font-family: var(--font-display); }
 
-  /* ── Nexa: body, descriptions, all UI text ── */
-  body {
-    font-family: var(--font-body);
-    font-weight: 300;
-  }
-  p, li, span,
-  .hero-desc, .about-text p, .building-desc,
-  .service-items li, .ccard-val,
-  .edu-school, .lead-org, .gcap-detail,
-  .gcap-role, .speaking-event, .lead-role,
-  .edu-degree, .ach-title, .contact-tagline,
-  .footer-tagline, .about-quote,
-  .card-bio, .back-ach-list li {
-    font-family: var(--font-body);
-  }
+  /* ── Oswald (Bank Gothic) — all-caps labels, eyebrows, tags */
+  .section-eyebrow, .hero-eyebrow, .gcap-tag, .gcap-year,
+  .edu-year, .edu-badge, .lead-event-tag, .speaking-role,
+  .service-cat, .impact-label, .stat-label, .building-badge,
+  .ccard-label, .back-section-label, .card-role,
+  .flip-front-label .fr, .flip-hint,
+  .nav-links a, .nav-logo, .btn-primary, .btn-outline { font-family: var(--font-label); }
 
-  /* ── Amsterdam One: LARGE display headings only ──
-     Bigger is better — this font is meant to be huge  */
-  .hero-name,
-  .section-title,
-  .building-brand,
-  .card-name,
-  .elevate-hero-text,
-  .impact-num,
-  .stat-num,
-  .back-watermark {
-    font-family: var(--font-display);
-    letter-spacing: 0.01em;
-  }
-
-  /* ── Bank Gothic: ALL-CAPS labels, nav, buttons, tags ── */
-  .section-eyebrow,
-  .hero-eyebrow,
-  .gcap-tag, .gcap-year,
-  .edu-year, .edu-badge,
-  .lead-event-tag, .lead-year-tag,
-  .speaking-role,
-  .service-cat,
-  .impact-label, .stat-label,
-  .building-badge,
-  .ccard-label, .card-role,
-  .flip-front-label .fr,
-  .flip-hint,
-  .nav-links a, .nav-logo,
-  .btn-primary, .btn-outline,
-  .back-monogram,
-  .gni-text,
-  .footer-copy {
-    font-family: var(--font-label);
-    letter-spacing: 0.12em;
-  }
-
-  /* ── Croogla: italic script accents ONLY ── */
-  .hero-name em,
-  .section-title em,
-  .hero-tagline,
-  .elevate-highlight,
-  .lead-contrib strong {
-    font-family: var(--font-script);
-    font-style: italic;
-    font-weight: 500;
-  }
+  /* ── Dancing Script (Croogla/Amsterdam One) — elegant italic accents */
+  .hero-tagline, .about-quote, .contact-tagline,
+  .footer-tagline, .elevate-highlight,
+  .hero-name em, .section-title em { font-family: var(--font-script); }
 
   /* ─── NAV ─── */
   nav {
@@ -517,16 +372,6 @@ document.addEventListener('DOMContentLoaded', function () {
     text-decoration: none; transition: color 0.3s;
   }
   .nav-links a:hover { color: var(--teal-mid); }
-
-  /* ─── NAV HAMBURGER (hidden on desktop) ─── */
-  .nav-hamburger {
-    display: none; flex-direction: column; gap: 5px;
-    cursor: pointer; padding: 4px; background: none; border: none;
-  }
-  .nav-hamburger span {
-    display: block; width: 22px; height: 2px;
-    background: var(--teal-deep); transition: all 0.3s; border-radius: 1px;
-  }
 
   /* ─── HERO ─── */
   #hero {
@@ -565,18 +410,12 @@ document.addEventListener('DOMContentLoaded', function () {
   .hero-eyebrow::before { content:''; display:block; width:28px; height:2px; background:var(--teal-mid); }
   .hero-name {
     font-family: var(--font-display);
-    font-size: clamp(2.4rem, 5vw, 4.2rem);
-    font-weight: 400;
-    line-height: 1.12; letter-spacing: 0.01em;
+    font-size: clamp(3rem, 6vw, 5.2rem); font-weight: 300;
+    line-height: 1.08; letter-spacing: -0.01em;
     color: var(--teal-deep);
     margin-bottom: 0.3rem; animation: fadeUp 1s ease both;
   }
-  .hero-name em {
-    font-family: var(--font-script);
-    font-style: italic; color: var(--teal-mid);
-    font-weight: 500; font-size: 1em;
-    display: inline;
-  }
+  .hero-name em { font-family: var(--font-script); font-style: italic; color: var(--teal-mid); font-weight: 600; font-size: 1.05em; }
   .hero-tagline {
     font-family: var(--font-script);
     font-size: clamp(1.1rem,2vw,1.5rem); font-weight: 500;
@@ -605,7 +444,6 @@ document.addEventListener('DOMContentLoaded', function () {
     transition: all 0.3s; display: inline-block;
   }
   .btn-outline:hover { background: var(--teal-deep); color: var(--cream); transform: translateY(-2px); }
-  .hero-left { position: relative; z-index: 1; padding-right: 3rem; }
   .hero-right {
     position: relative; z-index: 1;
     display: flex; justify-content: center; align-items: center;
@@ -623,8 +461,7 @@ document.addEventListener('DOMContentLoaded', function () {
     transform-style: preserve-3d;
     transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
   }
-  .flip-card-wrapper:hover .flip-card-inner,
-  .flip-card-wrapper.tapped .flip-card-inner { transform: rotateY(180deg); }
+  .flip-card-wrapper:hover .flip-card-inner { transform: rotateY(180deg); }
   .flip-front, .flip-back {
     position: absolute;
     top: 0; left: 0;
@@ -709,36 +546,35 @@ document.addEventListener('DOMContentLoaded', function () {
     background: linear-gradient(135deg, var(--teal-dark), var(--teal-mid));
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-label);
-    font-size: 0.9rem; font-weight: 700; color: var(--cream);
-    letter-spacing: 0.12em;
+    font-family: var(--font-display);
+    font-size: 1.2rem; font-weight: 700; color: var(--cream);
     margin-bottom: 1.3rem;
     box-shadow: 0 3px 14px rgba(10,60,57,0.2);
     flex-shrink: 0;
   }
   .card-name {
     font-family: var(--font-display);
-    font-size: 1.5rem; font-weight: 400;
-    color: var(--teal-deep); line-height: 1.1;
+    font-size: 2rem; font-weight: 300;
+    color: var(--teal-deep); line-height: 1.05;
     margin-bottom: 0.5rem;
   }
   .card-role {
     font-family: var(--font-label);
-    font-size: 0.58rem; color: var(--teal-mid); font-weight: 500;
+    font-size: 0.62rem; color: var(--teal-mid); font-weight: 600;
     letter-spacing: 0.16em; text-transform: uppercase;
-    line-height: 1.9; margin-bottom: 0;
+    line-height: 1.8; margin-bottom: 0;
   }
   .back-divider {
     width: 36px; height: 3px;
     background: linear-gradient(90deg, var(--teal-deep), var(--teal-mid));
-    margin: 1.2rem 0; flex-shrink: 0;
+    margin: 1.4rem 0; flex-shrink: 0;
   }
   .card-stats {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 0.75rem; margin-top: auto;
   }
   .stat-item {
-    padding: 1rem 0.8rem;
+    padding: 1.1rem 0.8rem;
     background: rgba(31,94,90,0.06);
     border: 1px solid rgba(31,94,90,0.12);
     text-align: center; transition: background 0.3s;
@@ -746,18 +582,18 @@ document.addEventListener('DOMContentLoaded', function () {
   .stat-item:hover { background: rgba(31,94,90,0.1); }
   .stat-num {
     font-family: var(--font-display);
-    font-size: 1.65rem; font-weight: 400;
+    font-size: 2.1rem; font-weight: 200;
     color: var(--teal-dark); display: block; line-height: 1; margin-bottom: 0.3rem;
   }
   .stat-label {
     font-family: var(--font-label);
-    font-size: 0.55rem; color: var(--text-light);
+    font-size: 0.58rem; color: var(--text-light);
     letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500;
   }
   .back-watermark {
     position: absolute; bottom: -1rem; right: 0.5rem;
     font-family: var(--font-display);
-    font-size: 5.5rem; font-weight: 400;
+    font-size: 7rem; font-weight: 800;
     color: rgba(31,94,90,0.05);
     line-height: 1; pointer-events: none; user-select: none; z-index: 0;
     letter-spacing: -0.03em;
@@ -776,14 +612,12 @@ document.addEventListener('DOMContentLoaded', function () {
   .section-eyebrow::after { content:''; flex:1; max-width:40px; height:2px; background:var(--teal-mid); }
   .section-title {
     font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    font-weight: 400; line-height: 1.18;
+    font-size: clamp(2rem,4vw,3rem); font-weight: 300; line-height: 1.15;
     color: var(--teal-deep); margin-bottom: 1rem;
   }
   .section-title em {
     font-family: var(--font-script);
-    font-style: italic; color: var(--teal-mid);
-    font-weight: 500; font-size: 1em;
+    font-style: italic; color: var(--teal-mid); font-weight: 600; font-size: 1.05em;
   }
   .section-subtitle { font-family: var(--font-body); font-size: 0.88rem; color: var(--text-light); line-height: 1.7; max-width: 520px; }
 
@@ -944,14 +778,13 @@ document.addEventListener('DOMContentLoaded', function () {
   .elevate-inner .section-title em { color: var(--teal-pale); }
   .elevate-hero-text {
     font-family: var(--font-script);
-    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
-    font-weight: 500; font-style: italic;
-    color: rgba(255,250,237,0.75); max-width: 600px; line-height: 1.7; margin-bottom: 2rem;
+    font-size:clamp(1.3rem,2.5vw,1.8rem); font-weight:500; font-style:italic;
+    color:rgba(255,250,237,0.72); max-width:600px; line-height:1.7; margin-bottom:2rem;
   }
   .elevate-highlight {
     font-family: var(--font-label);
-    font-size: clamp(0.68rem, 1.3vw, 0.82rem); font-weight: 600;
-    color: var(--teal-pale); letter-spacing: 0.2em; margin-bottom: 3.5rem; line-height: 2.4;
+    font-size:clamp(0.75rem,1.4vw,0.9rem); font-weight:600;
+    color:var(--teal-pale); letter-spacing:0.18em; margin-bottom:3.5rem; line-height:2.2;
   }
   .elevate-highlight span { background:rgba(69,122,117,0.25); padding:0.15em 0.5em; border-bottom:2px solid var(--teal-mid); }
   .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
@@ -967,9 +800,8 @@ document.addEventListener('DOMContentLoaded', function () {
     border-bottom:1px solid rgba(255,255,255,0.08);
   }
   .service-col h3 {
-    font-family: var(--font-body);
-    font-size: 1.3rem; font-weight: 800; color: var(--cream); margin-bottom: 1.2rem;
-    letter-spacing: 0.02em;
+    font-family: var(--font-display);
+    font-size:1.4rem; font-weight:300; color:var(--cream); margin-bottom:1.2rem;
   }
   .service-items { list-style:none; }
   .service-items li {
@@ -997,8 +829,8 @@ document.addEventListener('DOMContentLoaded', function () {
   .impact-item:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(31,94,90,0.1); }
   .impact-num {
     font-family: var(--font-display);
-    font-size: 2.5rem; font-weight: 400;
-    color: var(--teal-dark); display: block; line-height: 1; margin-bottom: 0.5rem;
+    font-size:3rem; font-weight:200;
+    color:var(--teal-dark); display:block; line-height:1; margin-bottom:0.5rem;
   }
   .impact-label {
     font-family: var(--font-label);
@@ -1018,7 +850,7 @@ document.addEventListener('DOMContentLoaded', function () {
   @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
   .building-brand {
     font-family: var(--font-display);
-    font-size:clamp(1.7rem,3vw,2.4rem); font-weight:400; line-height:1.18; margin-bottom:1rem; color:var(--teal-deep);
+    font-size:clamp(2rem,3.5vw,2.8rem); font-weight:300; line-height:1.15; margin-bottom:1rem; color:var(--teal-deep);
   }
   .building-desc { font-family: var(--font-body); font-size:0.88rem; color:var(--text-body); line-height:1.8; }
   .building-visual {
@@ -1212,6 +1044,10 @@ document.addEventListener('DOMContentLoaded', function () {
   .ccard-arrow { font-size:1rem; color:rgba(255,250,237,0.25); transition:all 0.3s; opacity:0; transform:translate(-4px,4px); flex-shrink:0; }
 
   /* ─── MOBILE HAMBURGER ─── */
+  .nav-hamburger {
+    display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none;
+  }
+  .nav-hamburger span { display:block; width:22px; height:2px; background:var(--text-dark); transition:all 0.3s; border-radius:1px; }
 
   /* ─── RESPONSIVE ─── */
   @media (max-width:900px) {
