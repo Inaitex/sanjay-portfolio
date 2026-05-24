@@ -64,22 +64,29 @@ document.addEventListener('DOMContentLoaded', function () {
    FONT FACES — Three brand fonts, local assets only
    ═══════════════════════════════════════════════════
 
-   FONT ROLE CHARTER
-   ─────────────────
-   CROOGLA      → Display / Hero only
-                  Large, prominent headings (hero h1, section titles)
-                  Stat numbers, watermarks, card names
-                  Used LARGE — this font lives at 1.5rem+
+   FONT ROLE CHARTER — one font, one job. No overlap.
+   ──────────────────────────────────────────────────
+   NEXA           → Display + Body workhorse
+                    Headings, hero name, section titles
+                    Paragraphs, descriptions, UI text
+                    Taglines, pull quote
+                    **Heading emphasis uses WEIGHT CONTRAST**: heavy 800 parent
+                    pairs with thin 200 <em> child, BOTH UPRIGHT (no italic).
+                    Matches client brand pattern: "EVENT Branding" / "Offline BRANDING".
+                    Weights: 200 thin → 800 heavy
+                    NEVER use font-style:italic — client dislikes italic.
 
-   BANK GOTHIC  → Label / Structure
-                  ALL-CAPS navigation, eyebrows, badges, tags
-                  Buttons, category labels, event tags
-                  Always uppercase, always letter-spaced
+   BANK GOTHIC    → Label / Structure
+                    ALL-CAPS navigation, eyebrows, badges, tags
+                    Buttons, category labels, event tags
+                    Always uppercase, always letter-spaced
 
-   NEXA         → Body / Everything else
-                  Paragraphs, descriptions, UI text, card body
-                  Italic/script accent moments (em tags)
-                  Weights: 200 thin → 800 heavy
+   CROOGLA        → Metric numbers + watermarks only
+                    Stat numbers, impact numbers, back watermarks.
+                    NEVER used for heading text or with font-style:italic.
+                    Client dislikes italic-looking text — Croogla's cursive
+                    letterforms read as italic, so it's confined to numeric
+                    and decorative roles where the script feel is acceptable.
 
    NO OTHER FONTS ARE USED ANYWHERE IN THIS FILE.
 ═══════════════════════════════════════════════════ */
@@ -99,11 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
   font-family: 'Nexa';
   src: url('fonts/nexa-regular.woff2') format('woff2');
   font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Nexa';
-  src: url('fonts/nexa-regular-italic.woff2') format('woff2');
-  font-weight: 400; font-style: italic; font-display: swap;
 }
 @font-face {
   font-family: 'Nexa';
@@ -170,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
   font-weight: 700; font-style: normal; font-display: swap;
 }
 
-
 /* ══════════════════════════════════════════════════
    CSS VARIABLES
    ══════════════════════════════════════════════════ */
@@ -193,11 +194,11 @@ document.addEventListener('DOMContentLoaded', function () {
   --border-dark:  rgba(10,60,57,0.2);
   --warm-white:   #FFFAED;
 
-  /* Font tokens — strictly three faces */
-  --f-display: 'Nexa', sans-serif;        /* Headings & titles: Nexa Bold/Heavy */
-  --f-body:    'Nexa', sans-serif;        /* Body text, paragraphs, UI text */
-  --f-label:   'BankGothic', sans-serif;  /* Bank Gothic: Nav, buttons, tags, uppercase labels */
-  --f-script:  'Croogla', sans-serif;     /* Croogla: Stylized italic accents, quotes, and metrics */
+  /* Font tokens — three faces, each with one role */
+  --f-display:   'Nexa', sans-serif;            /* Headings, body, taglines, pull quote — the workhorse */
+  --f-body:      'Nexa', sans-serif;            /* Body text, paragraphs, UI text */
+  --f-label:     'BankGothic', sans-serif;      /* Nav, buttons, tags, uppercase labels */
+  --f-script:    'Croogla', sans-serif;         /* Stat numbers + watermarks ONLY — never heading text, never with italic */
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -279,7 +280,6 @@ a,
 .hero-desc,
 .hero-tagline,
 .about-text p,
-.about-quote,
 .building-desc,
 .service-col h3,
 .service-items li,
@@ -298,24 +298,14 @@ a,
   font-family: var(--f-body);
 }
 
-/* ── Nexa Italic: Readable taglines ── */
+/* ── Nexa: Readable taglines (no italic — client prefers upright) ── */
 .hero-tagline,
 .contact-tagline,
 .footer-tagline,
 .elevate-hero-text {
   font-family: var(--f-body);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
-}
-
-/* ── Croogla Italic: High-impact stylized accents & quotes ── */
-.hero-name em,
-.section-title em,
-.lead-contrib strong,
-.about-quote {
-  font-family: var(--f-script); /* Croogla */
-  font-style: italic;
-  font-weight: 500;
 }
 
 /* Service column h3 — Nexa bold, NOT Croogla (sub-heading level) */
@@ -411,19 +401,22 @@ nav {
   color: var(--teal-deep);
   margin-bottom: 0.3rem; animation: fadeUp 1s ease both;
 }
-/* em inside hero-name: Croogla italic accent */
+/* em inside hero-name: Nexa weight contrast — heavy parent ↔ thin emphasis (client brand pattern) */
 .hero-name em {
-  font-family: var(--f-script);
-  font-style: italic; color: var(--teal-mid);
-  font-weight: 500; font-size: 1em;
+  font-family: var(--f-display);
+  font-style: normal;
+  font-weight: 200;
+  font-size: 1em;
+  color: var(--teal-mid);
   display: inline;
+  letter-spacing: -0.005em;
 }
 
-/* ── Hero tagline: Nexa italic ── */
+/* ── Hero tagline: Nexa upright (no italic) ── */
 .hero-tagline {
   font-family: var(--f-body);
   font-size: clamp(1.1rem,2vw,1.5rem); font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   color: var(--teal-dark); letter-spacing: 0.02em;
   margin-bottom: 1.8rem; animation: fadeUp 1s 0.15s ease both;
 }
@@ -468,8 +461,12 @@ nav {
   transform-style: preserve-3d;
   transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
-.flip-card-wrapper:hover .flip-card-inner,
+/* Touch devices: only `.tapped` toggles. Hover rule below is gated so iOS's
+   sticky :hover after first tap doesn't fight the JS toggle on tap 2. */
 .flip-card-wrapper.tapped .flip-card-inner { transform: rotateY(180deg); }
+@media (hover: hover) and (pointer: fine) {
+  .flip-card-wrapper:hover .flip-card-inner { transform: rotateY(180deg); }
+}
 .flip-front, .flip-back {
   position: absolute;
   top: 0; left: 0;
@@ -640,11 +637,14 @@ section { padding: 7rem 4rem; }
   color: var(--teal-deep); margin-bottom: 1rem;
   letter-spacing: -0.015em;
 }
-/* em in section title: Croogla italic accent */
+/* em in section title: Nexa weight contrast (heavy parent ↔ thin emphasis, matches client brand pattern) */
 .section-title em {
-  font-family: var(--f-script);
-  font-style: italic; color: var(--teal-mid);
-  font-weight: 500; font-size: 1em;
+  font-family: var(--f-display);
+  font-style: normal;
+  font-weight: 200;
+  font-size: 1em;
+  color: var(--teal-mid);
+  letter-spacing: -0.005em;
 }
 
 /* Section subtitle: Nexa light body */
@@ -663,18 +663,19 @@ section { padding: 7rem 4rem; }
   font-weight: 300;
 }
 .about-visual { position: relative; display: flex; align-items: center; justify-content: center; }
-/* About quote: Croogla italic script */
+/* About quote: Nexa thin upright pull quote (weight contrast pattern, no italic) */
 .about-quote {
-  font-family: var(--f-script);
-  font-size: 1.45rem; font-style: italic; font-weight: 400; line-height: 1.55;
+  font-family: var(--f-display);
+  font-size: 1.6rem; font-style: normal; font-weight: 200; line-height: 1.45;
   color: var(--teal-deep); padding: 3rem 2.5rem 2.5rem 3.8rem;
   background: var(--cream); border-left: 4px solid var(--teal-mid); position: relative;
   box-shadow: 0 10px 30px rgba(31,94,90,0.03);
+  letter-spacing: -0.005em;
 }
 .about-quote::before {
-  content:'\201C'; font-size: 5.5rem; color: rgba(69,122,117,0.14);
-  position:absolute; top: 0.2rem; left: 1rem;
-  font-family: var(--f-script); line-height:1;
+  content:'\201C'; font-size: 5rem; color: rgba(69,122,117,0.18);
+  position:absolute; top: 1rem; left: 1.2rem;
+  font-family: var(--f-display); font-weight: 800; line-height:1;
   pointer-events: none;
 }
 
@@ -825,16 +826,19 @@ section { padding: 7rem 4rem; }
 .elevate-inner .section-eyebrow::after { background: rgba(255,250,237,0.35); }
 .elevate-inner .section-title { color: var(--cream); }
 .elevate-inner .section-title em {
-  font-family: var(--f-script);
-  font-style: italic; color: var(--teal-pale);
-  font-weight: 500;
+  font-family: var(--f-display);
+  font-style: normal;
+  font-weight: 200;
+  font-size: 1em;
+  color: var(--teal-pale);
+  letter-spacing: -0.005em;
 }
 
-/* Elevate hero text: Nexa italic body */
+/* Elevate hero text: Nexa upright (no italic) */
 .elevate-hero-text {
   font-family: var(--f-body);
   font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-  font-weight: 400; font-style: italic;
+  font-weight: 400; font-style: normal;
   color: rgba(255,250,237,0.75); max-width: 600px; line-height: 1.7; margin-bottom: 2rem;
 }
 
@@ -925,10 +929,10 @@ section { padding: 7rem 4rem; }
   font-size:clamp(1.7rem,3vw,2.4rem); font-weight:800; line-height:1.18; margin-bottom:1rem; color:var(--teal-deep);
   letter-spacing: -0.015em;
 }
-/* Building brand sub: Nexa light italic */
+/* Building brand sub: Nexa light upright (no italic) */
 .building-brand em {
   font-family: var(--f-body);
-  font-style: italic;
+  font-style: normal;
   color: var(--text-light);
   font-size: 1.1rem;
   font-weight: 300;
@@ -967,24 +971,27 @@ section { padding: 7rem 4rem; }
 #contact .section-eyebrow::after { display:none; }
 #contact .section-title { color:var(--cream); text-align:center; }
 #contact .section-title em {
-  font-family: var(--f-script);
-  font-style: italic; color:var(--teal-pale);
-  font-weight: 500;
+  font-family: var(--f-display);
+  font-style: normal;
+  font-weight: 200;
+  font-size: 1em;
+  color: var(--teal-pale);
+  letter-spacing: -0.005em;
 }
 
-/* Contact tagline: Nexa italic */
+/* Contact tagline: Nexa upright (no italic) */
 .contact-tagline {
   font-family: var(--f-body);
-  font-size:1.4rem; font-style:italic; font-weight:400;
+  font-size:1.4rem; font-style:normal; font-weight:400;
   color:rgba(255,250,237,0.55); margin:1rem 0 2.5rem;
 }
 
 .contact-divider { height:1px; background:rgba(255,250,237,0.1); margin:2rem 0; }
 
-/* Footer tagline: Nexa italic */
+/* Footer tagline: Nexa upright (no italic) */
 .footer-tagline {
   font-family: var(--f-body);
-  font-size:1rem; font-style:italic;
+  font-size:1rem; font-style:normal;
   color:rgba(255,250,237,0.28); letter-spacing:0.03em;
 }
 
@@ -1102,6 +1109,8 @@ section { padding: 7rem 4rem; }
   .hero-desc { margin-left:auto; margin-right:auto; }
   .hero-btns { flex-direction:column; gap:0.8rem; align-items:center; }
   .btn-primary, .btn-outline { text-align:center; width:100%; max-width:280px; }
+  .about-quote { font-size: 1.3rem; padding: 2.5rem 1.8rem 2rem 3rem; }
+  .about-quote::before { font-size: 4.2rem; top: 0.6rem; left: 0.8rem; }
   .hero-right { display:flex !important; justify-content:center; width:100%; }
   .flip-card-wrapper { width:100%; max-width:360px; height:460px; }
   .flip-card-wrapper.tapped .flip-card-inner { transform:rotateY(180deg); }
