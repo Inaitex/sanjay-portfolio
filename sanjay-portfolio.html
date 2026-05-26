@@ -287,6 +287,12 @@ document.addEventListener('DOMContentLoaded', function () {
     img.src = thumbSrc;
     el.innerHTML = '';
     el.appendChild(img);
+    if (g.images.length > 1) {
+      var count = document.createElement('div');
+      count.className = 'cover-count';
+      count.textContent = g.images.length + (g.images.length === 1 ? ' Image' : ' Images');
+      el.appendChild(count);
+    }
   });
 
   // .card-thumb-strip[data-gallery] — 3 thumbs + "+N more" tile (CEO feature card)
@@ -338,8 +344,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var modalImg = modal.querySelector('.gallery-img');
     var modalTitle = modal.querySelector('.gallery-title');
     var modalCounter = modal.querySelector('.gallery-counter');
+    var modalProgress = modal.querySelector('.gallery-progress');
+    var modalProgressFill = modal.querySelector('.gallery-progress-fill');
+    var modalFilmstrip = modal.querySelector('.gallery-filmstrip');
     var currentId = null;
     var currentIndex = 0;
+    var swapTimer = null;
 
     var renderGallery = function () {
       var g = GALLERIES[currentId];
@@ -347,17 +357,77 @@ document.addEventListener('DOMContentLoaded', function () {
       var imgs = g.images;
       currentIndex = ((currentIndex % imgs.length) + imgs.length) % imgs.length;
       var item = imgs[currentIndex];
-      modalImg.src = (item && item.full) || item;  // prefer full-res, fall back to plain string
-      modalImg.alt = g.title + ' — ' + (currentIndex + 1);
+      var nextSrc = (item && item.full) || item;
+      // Crossfade: fade current image out, swap src once faded, fade back in
+      modalImg.classList.add('is-swapping');
+      if (swapTimer) clearTimeout(swapTimer);
+      swapTimer = setTimeout(function () {
+        modalImg.src = nextSrc;
+        modalImg.alt = g.title + ' — ' + (currentIndex + 1);
+        modalImg.classList.remove('is-swapping');
+      }, 180);
       modalTitle.textContent = g.title;
       modalCounter.textContent = (currentIndex + 1) + ' / ' + imgs.length;
+      // Progress bar fill
+      if (modalProgressFill) {
+        modalProgressFill.style.width = ((currentIndex + 1) / imgs.length * 100) + '%';
+      }
+      // Active filmstrip thumb + auto-scroll into view
+      if (modalFilmstrip) {
+        modalFilmstrip.querySelectorAll('.gallery-filmstrip-thumb').forEach(function (t, idx) {
+          var active = idx === currentIndex;
+          t.classList.toggle('is-active', active);
+          if (active) {
+            var rect = t.getBoundingClientRect();
+            var parentRect = modalFilmstrip.getBoundingClientRect();
+            if (rect.left < parentRect.left || rect.right > parentRect.right) {
+              modalFilmstrip.scrollTo({
+                left: t.offsetLeft - (modalFilmstrip.clientWidth / 2) + (t.clientWidth / 2),
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      }
+    };
+
+    var renderFilmstrip = function (g) {
+      if (!modalFilmstrip) return;
+      if (g.images.length <= 1) {
+        modalFilmstrip.setAttribute('hidden', '');
+        if (modalProgress) modalProgress.setAttribute('hidden', '');
+        modalFilmstrip.innerHTML = '';
+        return;
+      }
+      modalFilmstrip.removeAttribute('hidden');
+      if (modalProgress) modalProgress.removeAttribute('hidden');
+      modalFilmstrip.innerHTML = g.images.map(function (im, idx) {
+        var src = (im && im.thumb) || im;
+        return '<button class="gallery-filmstrip-thumb" type="button" role="tab" aria-label="Image ' + (idx + 1) + '" data-thumb-index="' + idx + '"><img src="' + src + '" alt="" loading="lazy" decoding="async"></button>';
+      }).join('');
     };
 
     var openGallery = function (id, startIndex) {
       if (!GALLERIES[id] || !GALLERIES[id].images.length) return;
       currentId = id;
       currentIndex = typeof startIndex === 'number' ? startIndex : 0;
-      renderGallery();
+      // Skip crossfade on first paint — render image immediately, no fade
+      var g = GALLERIES[id];
+      var imgs = g.images;
+      var firstItem = imgs[((currentIndex % imgs.length) + imgs.length) % imgs.length];
+      modalImg.classList.remove('is-swapping');
+      modalImg.src = (firstItem && firstItem.full) || firstItem;
+      modalImg.alt = g.title + ' — ' + (currentIndex + 1);
+      modalTitle.textContent = g.title;
+      modalCounter.textContent = (((currentIndex % imgs.length) + imgs.length) % imgs.length + 1) + ' / ' + imgs.length;
+      if (modalProgressFill) modalProgressFill.style.width = (((currentIndex % imgs.length) + imgs.length) % imgs.length + 1) / imgs.length * 100 + '%';
+      renderFilmstrip(g);
+      // Set active state on filmstrip after render
+      if (modalFilmstrip) {
+        modalFilmstrip.querySelectorAll('.gallery-filmstrip-thumb').forEach(function (t, idx) {
+          t.classList.toggle('is-active', idx === (((currentIndex % imgs.length) + imgs.length) % imgs.length));
+        });
+      }
       modal.removeAttribute('hidden');
       document.body.classList.add('nav-open');
     };
@@ -365,7 +435,9 @@ document.addEventListener('DOMContentLoaded', function () {
       modal.setAttribute('hidden', '');
       document.body.classList.remove('nav-open');
       modalImg.src = '';
+      modalImg.classList.remove('is-swapping');
       currentId = null;
+      if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
     };
 
     // Wire all gallery triggers: card covers, thumb-strip tiles, and the few remaining buttons.
@@ -386,6 +458,17 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.querySelector('.gallery-close').addEventListener('click', closeGallery);
     modal.querySelector('.gallery-prev').addEventListener('click', function () { currentIndex--; renderGallery(); });
     modal.querySelector('.gallery-next').addEventListener('click', function () { currentIndex++; renderGallery(); });
+    if (modalFilmstrip) {
+      modalFilmstrip.addEventListener('click', function (e) {
+        var thumb = e.target.closest('.gallery-filmstrip-thumb');
+        if (!thumb) return;
+        var idx = parseInt(thumb.getAttribute('data-thumb-index'), 10);
+        if (!isNaN(idx) && idx !== currentIndex) {
+          currentIndex = idx;
+          renderGallery();
+        }
+      });
+    }
     modal.addEventListener('click', function (e) { if (e.target === modal) closeGallery(); });
     document.addEventListener('keydown', function (e) {
       if (modal.hasAttribute('hidden')) return;
@@ -989,20 +1072,24 @@ body.nav-open { overflow: hidden; }
   overflow: hidden; background: var(--cream-dark);
   cursor: pointer; user-select: none;
   border-bottom: 1px solid var(--border);
+  outline: 1px solid transparent;
+  outline-offset: -11px;
+  transition: outline-color 0.45s ease;
 }
+.card-cover:hover { outline-color: rgba(201,165,90,0.75); }
 .card-cover[hidden] { display: none; }
 .card-cover img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: center;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1), filter 0.3s;
+  transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), filter 0.3s;
 }
-.card-cover:hover img { transform: scale(1.04); }
+.card-cover:hover img { transform: scale(1.05); }
 .card-cover::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(53,92,125,0.35) 100%);
-  opacity: 0; transition: opacity 0.3s;
+  background: linear-gradient(to bottom, transparent 55%, rgba(53,92,125,0.42) 100%);
+  opacity: 0; transition: opacity 0.35s;
   pointer-events: none;
 }
 .card-cover:hover::after { opacity: 1; }
@@ -1010,18 +1097,36 @@ body.nav-open { overflow: hidden; }
 .card-cover::before {
   content: 'View Gallery';
   font-family: var(--f-label);
-  position: absolute; bottom: 0.7rem; right: 0.7rem;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.55rem; font-weight: 600; letter-spacing: 0.16em;
+  position: absolute; bottom: 0.85rem; right: 0.85rem;
+  padding: 0.32rem 0.7rem;
+  font-size: 0.55rem; font-weight: 600; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--cream);
-  background: rgba(53,92,125,0.85); backdrop-filter: blur(6px);
-  border: 1px solid rgba(201,165,90,0.4);
-  opacity: 0; transform: translateY(4px); transition: opacity 0.3s, transform 0.3s;
-  pointer-events: none; z-index: 2;
+  background: rgba(53,92,125,0.78); backdrop-filter: blur(8px);
+  border: 1px solid rgba(201,165,90,0.5);
+  opacity: 0; transform: translateY(6px); transition: opacity 0.35s, transform 0.35s;
+  pointer-events: none; z-index: 3;
 }
 .card-cover:hover::before { opacity: 1; transform: translateY(0); }
 /* Single-image variant: no hover label (it's not a gallery, just the image) */
 .card-cover.is-single::before { content: 'View'; }
+/* Always-visible image-count chip — museum inventory badge */
+.cover-count {
+  position: absolute; top: 0.85rem; left: 0.85rem;
+  font-family: var(--f-label);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.5rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--cream);
+  background: rgba(53,92,125,0.6); backdrop-filter: blur(8px);
+  border: 1px solid rgba(201,165,90,0.4);
+  z-index: 2; pointer-events: none;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+}
+.cover-count::before {
+  content: ''; width: 5px; height: 5px;
+  background: var(--gold); display: inline-block;
+  transform: rotate(45deg);
+}
+.card-cover.is-single .cover-count { display: none; }
 /* Square cover for achievement cards (more compact, photo-like) */
 .card-cover-square { aspect-ratio: 1 / 1; }
 /* Achievement cards: when cover image is present, hide the emoji fallback icon */
@@ -1116,7 +1221,9 @@ body.nav-open { overflow: hidden; }
   max-width: 100%; max-height: 75vh; object-fit: contain;
   background: rgba(0,0,0,0.2);
   box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+  transition: opacity 0.22s ease;
 }
+.gallery-img.is-swapping { opacity: 0; }
 .gallery-prev, .gallery-next {
   position: absolute; top: 50%; transform: translateY(-50%);
   background: rgba(245,235,221,0.08);
@@ -1138,11 +1245,59 @@ body.nav-open { overflow: hidden; }
   font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em;
   color: rgba(245,235,221,0.6);
 }
+/* Hairline progress bar — gold fill grows with currentIndex */
+.gallery-progress {
+  width: 100%; max-width: 480px;
+  height: 1px;
+  background: rgba(245,235,221,0.18);
+  position: relative;
+  margin-top: -0.15rem;
+}
+.gallery-progress[hidden] { display: none; }
+.gallery-progress-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: var(--gold);
+  width: 0;
+  transition: width 0.4s cubic-bezier(0.2,0.6,0.2,1);
+}
+/* Filmstrip footer — all images as small thumbs, active highlighted in gold */
+.gallery-filmstrip {
+  display: flex; gap: 0.45rem;
+  width: 100%; max-width: 720px;
+  overflow-x: auto;
+  padding: 0.25rem 0.1rem 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245,235,221,0.25) transparent;
+  scroll-behavior: smooth;
+}
+.gallery-filmstrip[hidden] { display: none; }
+.gallery-filmstrip::-webkit-scrollbar { height: 4px; }
+.gallery-filmstrip::-webkit-scrollbar-track { background: transparent; }
+.gallery-filmstrip::-webkit-scrollbar-thumb { background: rgba(245,235,221,0.25); }
+.gallery-filmstrip-thumb {
+  position: relative; flex: 0 0 auto;
+  width: 64px; aspect-ratio: 4 / 3;
+  cursor: pointer; overflow: hidden;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(245,235,221,0.18);
+  opacity: 0.5;
+  transition: opacity 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.gallery-filmstrip-thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.gallery-filmstrip-thumb:hover { opacity: 0.85; }
+.gallery-filmstrip-thumb.is-active {
+  opacity: 1;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold);
+}
 @media (max-width: 700px) {
   .gallery-modal { padding: 3rem 0.5rem 1.5rem; }
   .gallery-prev, .gallery-next { width: 40px; height: 40px; font-size: 1.2rem; }
   .gallery-prev { left: 0.25rem; }
   .gallery-next { right: 0.25rem; }
+  .gallery-filmstrip-thumb { width: 52px; }
 }
 
 /* Brands logo strip */
@@ -2285,6 +2440,8 @@ section { padding: 7rem 4rem; }
       <button class="gallery-next" aria-label="Next image">›</button>
     </div>
     <div class="gallery-counter"></div>
+    <div class="gallery-progress"><div class="gallery-progress-fill"></div></div>
+    <div class="gallery-filmstrip" role="tablist" aria-label="Image thumbnails"></div>
   </div>
 </div>
 
