@@ -522,23 +522,25 @@ document.addEventListener('DOMContentLoaded', function () {
    CSS VARIABLES
    ══════════════════════════════════════════════════ */
 :root {
-  --teal-deep:    #0A3C39;
-  --teal-dark:    #1F5E5A;
-  --teal-mid:     #457A75;
-  --teal-light:   #6A9E9A;
-  --teal-pale:    #c2d8d6;
-  --cream:        #FFFAED;
-  --cream-dark:   #f5f0df;
+  --teal-deep:    #1f3d57;
+  --teal-dark:    #2a4d6a;
+  --teal-mid:     #355C7D;
+  --teal-light:   #7a91a8;
+  --teal-pale:    #d8c8b8;
+  --cream:        #F5EBDD;
+  --cream-dark:   #ece0cf;
   --gold:         #C9A55A;
   --gold-light:   #e8d5a0;
-  --text-dark:    #0A3C39;
-  --text-mid:     #1F5E5A;
-  --text-body:    #2a4644;
-  --text-light:   #5a8480;
-  --text-on-dark: #FFFAED;
-  --border:       rgba(31,94,90,0.13);
-  --border-dark:  rgba(10,60,57,0.2);
-  --warm-white:   #FFFAED;
+  --taupe:        #B8A89A;
+  --copper:       #B56E45;
+  --text-dark:    #1f3d57;
+  --text-mid:     #2a4d6a;
+  --text-body:    #34465a;
+  --text-light:   #6b8197;
+  --text-on-dark: #F5EBDD;
+  --border:       rgba(53,92,125,0.13);
+  --border-dark:  rgba(31,61,87,0.2);
+  --warm-white:   #F5EBDD;
 
   /* Font tokens — four faces, matching Elevate Hub brand system */
   --f-display:   'Nexa', sans-serif;            /* Headings, body, taglines, pull quote — the workhorse */
@@ -713,8 +715,8 @@ body.nav-open { overflow: hidden; }
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
   background:
-    radial-gradient(ellipse 60% 60% at 80% 20%, rgba(69,122,117,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(31,94,90,0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 20%, rgba(53,92,125,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(42,77,106,0.09) 0%, transparent 60%),
     radial-gradient(ellipse 40% 40% at 60% 60%, rgba(201,165,90,0.06) 0%, transparent 50%);
 }
 .hero-blob {
@@ -722,8 +724,8 @@ body.nav-open { overflow: hidden; }
   filter: blur(80px);
   animation: float 12s ease-in-out infinite;
 }
-.blob-1 { width: 500px; height: 500px; background: rgba(69,122,117,0.10); top: -100px; right: -100px; }
-.blob-2 { width: 350px; height: 350px; background: rgba(31,94,90,0.07); bottom: 0; left: 200px; animation-delay: -5s; }
+.blob-1 { width: 500px; height: 500px; background: rgba(53,92,125,0.10); top: -100px; right: -100px; }
+.blob-2 { width: 350px; height: 350px; background: rgba(42,77,106,0.07); bottom: 0; left: 200px; animation-delay: -5s; }
 @keyframes float {
   0%,100% { transform: translate(0,0) scale(1); }
   33% { transform: translate(-20px,30px) scale(1.05); }
@@ -858,7 +860,7 @@ body.nav-open { overflow: hidden; }
 .flip-front::after {
   content: '';
   position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
-  background: linear-gradient(to top, rgba(10,60,57,0.75) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(31,61,87,0.75) 0%, transparent 100%);
   pointer-events: none; z-index: 1;
 }
 .flip-front-label {
@@ -884,7 +886,7 @@ body.nav-open { overflow: hidden; }
   font-size: 0.55rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
   color: rgba(255,255,255,0.65);
   display: flex; align-items: center; gap: 0.3rem;
-  background: rgba(10,60,57,0.4); padding: 0.3rem 0.65rem;
+  background: rgba(31,61,87,0.4); padding: 0.3rem 0.65rem;
   backdrop-filter: blur(6px);
 }
 .flip-hint::after { content: '↻'; font-size: 0.85rem; }
@@ -918,7 +920,7 @@ body.nav-open { overflow: hidden; }
   font-size: 0.9rem; font-weight: 700; color: var(--cream);
   letter-spacing: 0.12em;
   margin-bottom: 1.3rem;
-  box-shadow: 0 3px 14px rgba(10,60,57,0.2);
+  box-shadow: 0 3px 14px rgba(31,61,87,0.2);
   flex-shrink: 0;
 }
 /* Card name: Nexa display */
@@ -947,11 +949,11 @@ body.nav-open { overflow: hidden; }
 }
 .stat-item {
   padding: 1rem 0.8rem;
-  background: rgba(31,94,90,0.06);
-  border: 1px solid rgba(31,94,90,0.12);
+  background: rgba(42,77,106,0.06);
+  border: 1px solid rgba(42,77,106,0.12);
   text-align: center; transition: background 0.3s;
 }
-.stat-item:hover { background: rgba(31,94,90,0.1); }
+.stat-item:hover { background: rgba(42,77,106,0.1); }
 /* Stat numbers: Croogla script */
 .stat-num {
   font-family: var(--f-script);
@@ -969,7 +971,7 @@ body.nav-open { overflow: hidden; }
   font-family: var(--f-script);
   position: absolute; bottom: -1rem; right: 0.5rem;
   font-size: 5.5rem; font-weight: 500;
-  color: rgba(31,94,90,0.05);
+  color: rgba(42,77,106,0.05);
   line-height: 1; pointer-events: none; user-select: none; z-index: 0;
   letter-spacing: -0.03em;
 }
@@ -999,7 +1001,7 @@ body.nav-open { overflow: hidden; }
 .card-cover::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(10,60,57,0.35) 100%);
+  background: linear-gradient(to bottom, transparent 60%, rgba(31,61,87,0.35) 100%);
   opacity: 0; transition: opacity 0.3s;
   pointer-events: none;
 }
@@ -1012,7 +1014,7 @@ body.nav-open { overflow: hidden; }
   padding: 0.3rem 0.6rem;
   font-size: 0.55rem; font-weight: 600; letter-spacing: 0.16em;
   text-transform: uppercase; color: var(--cream);
-  background: rgba(10,60,57,0.85); backdrop-filter: blur(6px);
+  background: rgba(31,61,87,0.85); backdrop-filter: blur(6px);
   border: 1px solid rgba(232,213,160,0.4);
   opacity: 0; transform: translateY(4px); transition: opacity 0.3s, transform 0.3s;
   pointer-events: none; z-index: 2;
@@ -1084,7 +1086,7 @@ body.nav-open { overflow: hidden; }
 
 .gallery-modal {
   position: fixed; inset: 0; z-index: 1000;
-  background: rgba(10,60,57,0.92);
+  background: rgba(31,61,87,0.92);
   display: flex; align-items: center; justify-content: center;
   padding: 4rem 1.5rem 2rem;
   animation: fadeUp 0.25s ease both;
@@ -1249,11 +1251,11 @@ section { padding: 7rem 4rem; }
   font-size: 1.6rem; font-style: normal; font-weight: 200; line-height: 1.45;
   color: var(--teal-deep); padding: 3rem 2.5rem 2.5rem 3.8rem;
   background: var(--cream); border-left: 4px solid var(--teal-mid); position: relative;
-  box-shadow: 0 10px 30px rgba(31,94,90,0.03);
+  box-shadow: 0 10px 30px rgba(42,77,106,0.03);
   letter-spacing: -0.005em;
 }
 .about-quote::before {
-  content:'\201C'; font-size: 5rem; color: rgba(69,122,117,0.18);
+  content:'\201C'; font-size: 5rem; color: rgba(53,92,125,0.18);
   position:absolute; top: 1rem; left: 1.2rem;
   font-family: var(--f-display); font-weight: 800; line-height:1;
   pointer-events: none;
@@ -1271,7 +1273,7 @@ section { padding: 7rem 4rem; }
   background: linear-gradient(90deg, var(--teal-deep), var(--teal-mid), var(--gold));
   transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
 }
-.edu-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(10,60,57,0.1); }
+.edu-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(31,61,87,0.1); }
 .edu-card:hover::after { transform: scaleX(1); }
 .edu-card-body { padding: 2rem 2rem 2.5rem; }
 
@@ -1297,7 +1299,7 @@ section { padding: 7rem 4rem; }
 .edu-badge {
   font-family: var(--f-label);
   display:inline-block; padding:0.3rem 0.9rem;
-  background: rgba(31,94,90,0.08); border: 1px solid var(--border);
+  background: rgba(42,77,106,0.08); border: 1px solid var(--border);
   font-size:0.68rem; font-weight:600; letter-spacing:0.1em; color: var(--teal-dark);
 }
 .edu-badge.current { background:rgba(201,165,90,0.12); color:var(--gold); border-color:rgba(201,165,90,0.25); }
@@ -1321,7 +1323,7 @@ section { padding: 7rem 4rem; }
   background: var(--cream); border: 1px solid var(--border);
   overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
 }
-.lead-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(31,94,90,0.1); }
+.lead-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(42,77,106,0.1); }
 .lead-card-body { padding: 1.5rem; }
 
 /* Lead event tag: BankGothic label */
@@ -1346,8 +1348,8 @@ section { padding: 7rem 4rem; }
 .lead-year-tag {
   font-family: var(--f-label);
   display: inline-block; padding: 0.2rem 0.6rem;
-  background: rgba(69,122,117,0.1); font-size: 0.62rem; font-weight: 600;
-  letter-spacing: 0.1em; color: var(--teal-dark); border: 1px solid rgba(69,122,117,0.2);
+  background: rgba(53,92,125,0.1); font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.1em; color: var(--teal-dark); border: 1px solid rgba(53,92,125,0.2);
 }
 
 /* CEO feature card: structured contribution list */
@@ -1376,7 +1378,7 @@ section { padding: 7rem 4rem; }
   background: var(--cream); border: 1px solid var(--border);
   overflow: hidden; transition: all 0.3s; position: relative;
 }
-.speaking-card:hover { border-color: var(--teal-mid); box-shadow: 0 8px 30px rgba(31,94,90,0.1); transform: translateY(-3px); }
+.speaking-card:hover { border-color: var(--teal-mid); box-shadow: 0 8px 30px rgba(42,77,106,0.1); transform: translateY(-3px); }
 .speaking-card-body { padding: 1.5rem; }
 
 /* Speaking role: BankGothic label */
@@ -1403,7 +1405,7 @@ section { padding: 7rem 4rem; }
   background: var(--cream); border: 1px solid var(--border);
   overflow: hidden; transition: all 0.3s;
 }
-.ach-item:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(31,94,90,0.1); }
+.ach-item:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(42,77,106,0.1); }
 .ach-item-body { padding: 1.2rem; text-align: center; }
 .ach-icon { font-size:1.4rem; margin-bottom:0.5rem; }
 /* Achievement title: BankGothic label */
@@ -1418,7 +1420,7 @@ section { padding: 7rem 4rem; }
 .elevate-bg {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 60% 60% at 90% 10%, rgba(69,122,117,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 90% 10%, rgba(53,92,125,0.15) 0%, transparent 60%),
     radial-gradient(ellipse 50% 50% at 10% 90%, rgba(201,165,90,0.08) 0%, transparent 60%);
 }
 .elevate-inner { position: relative; z-index: 1; }
@@ -1447,7 +1449,7 @@ section { padding: 7rem 4rem; }
   font-size: 0.78em; font-weight: 600; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--teal-pale);
   padding: 0.15em 0.55em;
-  background: rgba(69,122,117,0.25);
+  background: rgba(53,92,125,0.25);
   border-bottom: 2px solid var(--teal-mid);
   white-space: nowrap;
 }
@@ -1462,7 +1464,7 @@ section { padding: 7rem 4rem; }
   padding:2.5rem; border:1px solid rgba(255,255,255,0.08);
   background:rgba(255,255,255,0.03); transition: border-color 0.3s, background 0.3s;
 }
-.service-col:hover { border-color:rgba(69,122,117,0.4); background:rgba(69,122,117,0.07); }
+.service-col:hover { border-color:rgba(53,92,125,0.4); background:rgba(53,92,125,0.07); }
 
 /* Service category: BankGothic label */
 .service-cat {
@@ -1510,11 +1512,11 @@ section { padding: 7rem 4rem; }
 }
 .impact-item::before {
   content:''; position:absolute; inset:0;
-  background:linear-gradient(135deg,rgba(31,94,90,0.04),rgba(69,122,117,0.07));
+  background:linear-gradient(135deg,rgba(42,77,106,0.04),rgba(53,92,125,0.07));
   opacity:0; transition:opacity 0.3s;
 }
 .impact-item:hover::before { opacity:1; }
-.impact-item:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(31,94,90,0.1); }
+.impact-item:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(42,77,106,0.1); }
 
 /* Impact numbers: Croogla script */
 .impact-num {
@@ -1535,7 +1537,7 @@ section { padding: 7rem 4rem; }
 .building-badge {
   font-family: var(--f-label);
   display:inline-flex; align-items:center; gap:0.5rem;
-  padding:0.4rem 1rem; background:rgba(31,94,90,0.08); border:1px solid rgba(31,94,90,0.2);
+  padding:0.4rem 1rem; background:rgba(42,77,106,0.08); border:1px solid rgba(42,77,106,0.2);
   font-size:0.62rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
   color:var(--teal-dark); margin-bottom:1.5rem;
 }
@@ -1568,21 +1570,21 @@ section { padding: 7rem 4rem; }
 }
 .building-visual {
   aspect-ratio:4/3;
-  background:linear-gradient(135deg, rgba(31,94,90,0.06) 0%, rgba(69,122,117,0.12) 100%);
+  background:linear-gradient(135deg, rgba(42,77,106,0.06) 0%, rgba(53,92,125,0.12) 100%);
   display:flex; align-items:center; justify-content:center;
-  position:relative; overflow:hidden; border:1px solid rgba(31,94,90,0.15);
+  position:relative; overflow:hidden; border:1px solid rgba(42,77,106,0.15);
 }
 .building-visual::before {
   content:'ANUGRAHA NIKETAN'; font-family: var(--f-label);
   font-size:1.1rem; font-weight:600; letter-spacing:0.22em;
-  color:rgba(31,94,90,0.22); position:absolute; text-align:center; padding:2rem;
+  color:rgba(42,77,106,0.22); position:absolute; text-align:center; padding:2rem;
   text-transform: uppercase;
 }
 .building-visual::after {
   content:'Launching Soon'; font-family: var(--f-label);
   font-size:0.65rem; font-weight:600; letter-spacing:0.2em;
   text-transform:uppercase; color:var(--teal-dark); position:absolute; bottom:1.5rem;
-  background:rgba(31,94,90,0.08); padding:0.5rem 1.5rem; border:1px solid rgba(31,94,90,0.2);
+  background:rgba(42,77,106,0.08); padding:0.5rem 1.5rem; border:1px solid rgba(42,77,106,0.2);
 }
 
 /* ─── CONTACT ─── */
@@ -1724,7 +1726,7 @@ section { padding: 7rem 4rem; }
     position:fixed; top:58px; left:0; right:0;
     background:rgba(255,250,237,0.97); backdrop-filter:blur(20px);
     padding:1.5rem 2rem; border-bottom:1px solid var(--border);
-    gap:1.2rem; z-index:99; box-shadow:0 8px 30px rgba(10,60,57,0.1);
+    gap:1.2rem; z-index:99; box-shadow:0 8px 30px rgba(31,61,87,0.1);
   }
   nav.menu-open .nav-links a { font-size:1rem; padding-bottom: 6px; }
   nav.menu-open .nav-hamburger span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
