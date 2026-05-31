@@ -478,6 +478,160 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // ── Photo Marquee Strips — auto-scrolling cinema strips per section ──
+  // Mirrors Elevate Hub ClientLogos technique:
+  // pool images x2 in one flex row, CSS translate -50% = seamless infinite loop.
+  var PLACEHOLDER_PATH = 'images-opt/Profile picture/profile picture';
+
+  var SECTION_GALLERIES = {
+    leadership:   ['lead-ceo','lead-digital','lead-president','lead-marketing','lead-advisor','lead-head'],
+    speaking:     ['speak-investiture','speak-arthashasthra','speak-freshers','speak-guest-lecture','speak-fusion','speak-luminex'],
+    achievements: ['ach-best-student','ach-regularity','ach-leadership','ach-multiple','ach-cofounder']
+  };
+
+  // Custom event bridge so strip clicks can trigger the existing modal.
+  // We bind a separate lightweight handler on pm:open event.
+  var _pmCurId = null, _pmCurIdx = 0, _pmSwapT = null;
+  var _pmModal = document.getElementById('galleryModal');
+
+  if (_pmModal) {
+    var _pmImg     = _pmModal.querySelector('.gallery-img');
+    var _pmTitle   = _pmModal.querySelector('.gallery-title');
+    var _pmCounter = _pmModal.querySelector('.gallery-counter');
+    var _pmPFill   = _pmModal.querySelector('.gallery-progress-fill');
+    var _pmFilm    = _pmModal.querySelector('.gallery-filmstrip');
+    var _pmProg    = _pmModal.querySelector('.gallery-progress');
+
+    function _pmRenderFilm(g) {
+      if (!_pmFilm) return;
+      if (g.images.length <= 1) {
+        _pmFilm.setAttribute('hidden','');
+        if (_pmProg) _pmProg.setAttribute('hidden','');
+        _pmFilm.innerHTML = ''; return;
+      }
+      _pmFilm.removeAttribute('hidden');
+      if (_pmProg) _pmProg.removeAttribute('hidden');
+      _pmFilm.innerHTML = g.images.map(function(im, i) {
+        var s = (im && im.thumb) || im;
+        return '<button class="gallery-filmstrip-thumb" type="button" role="tab" aria-label="Image '+(i+1)+'" data-thumb-index="'+i+'"><img src="'+s+'" alt="" loading="lazy" decoding="async"></button>';
+      }).join('');
+    }
+
+    function _pmRenderGallery() {
+      var g = GALLERIES[_pmCurId]; if (!g || !g.images.length) return;
+      var imgs = g.images;
+      _pmCurIdx = ((_pmCurIdx % imgs.length) + imgs.length) % imgs.length;
+      var item = imgs[_pmCurIdx], nextSrc = (item && item.full) || item;
+      _pmImg.classList.add('is-swapping');
+      if (_pmSwapT) clearTimeout(_pmSwapT);
+      _pmSwapT = setTimeout(function() {
+        _pmImg.src = nextSrc;
+        _pmImg.alt = g.title + ' — ' + (_pmCurIdx + 1);
+        _pmImg.classList.remove('is-swapping');
+      }, 180);
+      _pmTitle.textContent = g.title;
+      _pmCounter.textContent = (_pmCurIdx + 1) + ' / ' + imgs.length;
+      if (_pmPFill) _pmPFill.style.width = ((_pmCurIdx + 1) / imgs.length * 100) + '%';
+      if (_pmFilm) {
+        _pmFilm.querySelectorAll('.gallery-filmstrip-thumb').forEach(function(t, i) {
+          var active = i === _pmCurIdx; t.classList.toggle('is-active', active);
+          if (active) {
+            var r = t.getBoundingClientRect(), pr = _pmFilm.getBoundingClientRect();
+            if (r.left < pr.left || r.right > pr.right)
+              _pmFilm.scrollTo({ left: t.offsetLeft - (_pmFilm.clientWidth/2) + (t.clientWidth/2), behavior: 'smooth' });
+          }
+        });
+      }
+    }
+
+    // Listen for pm:open dispatched by strip click handler
+    document.addEventListener('pm:open', function(e) {
+      var id = e.detail.id, idx = e.detail.index;
+      var g = GALLERIES[id]; if (!g || !g.images.length) return;
+      _pmCurId = id; _pmCurIdx = idx;
+      var imgs = g.images, norm = ((idx % imgs.length) + imgs.length) % imgs.length;
+      var firstItem = imgs[norm];
+      _pmImg.classList.remove('is-swapping');
+      _pmImg.src = (firstItem && firstItem.full) || firstItem;
+      _pmImg.alt = g.title + ' — ' + (norm + 1);
+      _pmTitle.textContent = g.title;
+      _pmCounter.textContent = (norm + 1) + ' / ' + imgs.length;
+      if (_pmPFill) _pmPFill.style.width = ((norm + 1) / imgs.length * 100) + '%';
+      _pmRenderFilm(g);
+      if (_pmFilm) _pmFilm.querySelectorAll('.gallery-filmstrip-thumb').forEach(function(t, i) {
+        t.classList.toggle('is-active', i === norm);
+      });
+      _pmModal.removeAttribute('hidden');
+      document.body.classList.add('nav-open');
+    });
+
+    // Filmstrip + prev/next for pm:open pathway
+    if (_pmFilm) {
+      _pmFilm.addEventListener('click', function(e) {
+        var thumb = e.target.closest('.gallery-filmstrip-thumb'); if (!thumb) return;
+        var i = parseInt(thumb.getAttribute('data-thumb-index'), 10);
+        if (!isNaN(i) && i !== _pmCurIdx) { _pmCurIdx = i; _pmRenderGallery(); }
+      });
+    }
+    var _pmPrevBtn = _pmModal.querySelector('.gallery-prev');
+    var _pmNextBtn = _pmModal.querySelector('.gallery-next');
+    if (_pmPrevBtn) _pmPrevBtn.addEventListener('click', function() { _pmCurIdx--; _pmRenderGallery(); });
+    if (_pmNextBtn) _pmNextBtn.addEventListener('click', function() { _pmCurIdx++; _pmRenderGallery(); });
+  }
+
+  // Build each .photo-marquee strip on the page
+  document.querySelectorAll('.photo-marquee[data-section]').forEach(function(wrapEl) {
+    var sectionKey = wrapEl.getAttribute('data-section');
+    var galleryIds = SECTION_GALLERIES[sectionKey];
+    if (!galleryIds) return;
+
+    // Pool all real (non-placeholder) thumb images in manifest order
+    var pool = [];
+    galleryIds.forEach(function(gid) {
+      var g = GALLERIES[gid];
+      if (!g || !g.images || !g.images.length) return;
+      g.images.forEach(function(im, idx) {
+        var src = (im && im.thumb) || im;
+        if (typeof src === 'string' && src.indexOf(PLACEHOLDER_PATH) !== -1) return;
+        pool.push({ src: src, galleryId: gid, index: idx });
+      });
+    });
+
+    if (!pool.length) {
+      wrapEl.setAttribute('hidden', '');
+      var labelEl = wrapEl.previousElementSibling;
+      if (labelEl && labelEl.classList.contains('photo-marquee-label')) labelEl.setAttribute('hidden', '');
+      return;
+    }
+
+    var track = wrapEl.querySelector('.photo-marquee-track');
+    if (!track) return;
+
+    // Double the pool for the seamless loop (translate -50%)
+    var doubled = pool.concat(pool);
+    track.innerHTML = doubled.map(function(item, i) {
+      var isClone = i >= pool.length;
+      var gTitle = (GALLERIES[item.galleryId] && GALLERIES[item.galleryId].title) || '';
+      var ariaAttr = isClone
+        ? ' aria-hidden="true"'
+        : ' aria-label="' + gTitle + ' — photo ' + (item.index + 1) + '"';
+      return '<button class="pm-photo" type="button"' +
+        ' data-gallery="' + item.galleryId + '"' +
+        ' data-index="' + item.index + '"' +
+        ariaAttr + '>' +
+        '<img src="' + item.src + '" alt="" loading="lazy" decoding="async">' +
+        '</button>';
+    }).join('');
+
+    // Click: open modal at the photo's gallery + index
+    track.addEventListener('click', function(e) {
+      var btn = e.target.closest('.pm-photo'); if (!btn) return;
+      var gid = btn.getAttribute('data-gallery');
+      var idx = parseInt(btn.getAttribute('data-index'), 10) || 0;
+      document.dispatchEvent(new CustomEvent('pm:open', { detail: { id: gid, index: idx } }));
+    });
+  });
+
 });
 </script>
 
@@ -1939,6 +2093,101 @@ section { padding: 7rem 4rem; }
   .stat-num { font-size:1.5rem; }
 }
 
+/* ─── PHOTO MARQUEE STRIPS ─── */
+/* Infinite auto-scrolling photo row — same technique as Elevate Hub ClientLogos.
+   Track holds the photo set twice; CSS translates by -50% for a seamless loop. */
+.photo-marquee {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 72px, #000 calc(100% - 72px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 72px, #000 calc(100% - 72px), transparent 100%);
+  margin-top: 3rem;
+}
+.photo-marquee-track {
+  display: flex;
+  gap: 0.6rem;
+  width: max-content;
+  animation: photo-marquee 60s linear infinite;
+}
+.photo-marquee[data-speed="fast"]   .photo-marquee-track { animation-duration: 38s; }
+.photo-marquee[data-speed="medium"] .photo-marquee-track { animation-duration: 50s; }
+.photo-marquee[data-speed="slow"]   .photo-marquee-track { animation-duration: 75s; }
+.photo-marquee:hover .photo-marquee-track { animation-play-state: paused; }
+/* Each photo tile */
+.pm-photo {
+  flex-shrink: 0;
+  height: 230px;
+  overflow: hidden;
+  cursor: pointer;
+  border: none; padding: 0; margin: 0;
+  background: var(--cream-dark);
+  position: relative;
+  display: block;
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+  transition: outline-color 0.4s;
+}
+.pm-photo:hover { outline-color: rgba(201,165,90,0.7); }
+.pm-photo img {
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.2,0.6,0.2,1);
+}
+.pm-photo:hover img { transform: scale(1.06); }
+/* Hover overlay pill */
+.pm-photo::after {
+  content: 'View';
+  font-family: var(--f-label);
+  position: absolute; bottom: 0.6rem; right: 0.6rem;
+  padding: 0.28rem 0.6rem;
+  font-size: 0.5rem; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--cream);
+  background: rgba(53,92,125,0.78); backdrop-filter: blur(8px);
+  border: 1px solid rgba(201,165,90,0.45);
+  opacity: 0; transform: translateY(4px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none; z-index: 3;
+}
+.pm-photo:hover::after { opacity: 1; transform: translateY(0); }
+/* Section label above the strip */
+.photo-marquee-label {
+  font-family: var(--f-label);
+  font-size: 0.58rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--teal-mid);
+  margin-bottom: 0.9rem; margin-top: 3rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.photo-marquee-label::before {
+  content: ''; display: inline-block;
+  width: 18px; height: 1px; background: var(--teal-mid);
+}
+.photo-marquee-label::after {
+  content: ''; display: inline-block;
+  width: 5px; height: 5px; background: var(--gold);
+  transform: rotate(45deg);
+}
+/* Keyframe — identical to Elevate Hub logo-marquee */
+@keyframes photo-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+/* Reduced motion: stop animation, user can scroll manually */
+@media (prefers-reduced-motion: reduce) {
+  .photo-marquee-track { animation: none; }
+  .photo-marquee { overflow-x: auto; scrollbar-width: none; }
+  .photo-marquee::-webkit-scrollbar { display: none; }
+}
+/* Mobile */
+@media (max-width: 600px) {
+  .pm-photo { height: 170px; }
+  .photo-marquee-track { gap: 0.4rem; }
+  .photo-marquee { margin-top: 2rem; }
+  .photo-marquee-label { margin-top: 2rem; padding: 0 1.5rem !important; }
+}
+
 </style>
 </head>
 <body>
@@ -2143,6 +2392,12 @@ section { padding: 7rem 4rem; }
       </div>
     </div>
   </div>
+
+  <!-- All leadership photos — auto-scrolling cinema strip -->
+  <p class="photo-marquee-label" style="padding: 0 4rem;">All Photos</p>
+  <div class="photo-marquee" data-section="leadership" data-speed="slow">
+    <div class="photo-marquee-track"></div>
+  </div>
 </section>
 
 <!-- SPEAKING -->
@@ -2201,6 +2456,12 @@ section { padding: 7rem 4rem; }
       </div>
     </div>
   </div>
+
+  <!-- All speaking photos — auto-scrolling cinema strip -->
+  <p class="photo-marquee-label" style="padding: 0 4rem;">All Photos</p>
+  <div class="photo-marquee" data-section="speaking" data-speed="medium">
+    <div class="photo-marquee-track"></div>
+  </div>
 </section>
 
 <!-- ACHIEVEMENTS -->
@@ -2244,6 +2505,12 @@ section { padding: 7rem 4rem; }
         <div class="ach-title">Co-Founder, Commerce Conglomeration</div>
       </div>
     </div>
+  </div>
+
+  <!-- All achievement photos — auto-scrolling cinema strip -->
+  <p class="photo-marquee-label" style="padding: 0 4rem;">All Photos</p>
+  <div class="photo-marquee" data-section="achievements" data-speed="fast">
+    <div class="photo-marquee-track"></div>
   </div>
 </section>
 
