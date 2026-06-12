@@ -1940,63 +1940,48 @@ section { padding: 7rem 4rem; }
 }
 
 /* ── LEFT INTRO COLUMN ── */
-.academic-intro .section-tag {
+.academic-intro .section-tag,
+.leadership-intro .section-tag {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 25px;
 }
-.academic-intro .section-tag span {
+.academic-intro .section-tag span,
+.leadership-intro .section-tag span {
   font-family: var(--f-label);
   color: var(--teal-deep);
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
 }
-.academic-intro .section-tag::after {
-  content: "";
-  width: 60px;
-  height: 1px;
-  background: var(--copper);
-}
-.academic-intro .section-title {
+.academic-intro .section-title,
+.leadership-intro .section-title {
   margin: 0;
   font-family: var(--f-display);
-  font-weight: 300;
+  font-weight: 800;
   line-height: 1.1;
-  font-size: clamp(2rem, 4.5vw, 3rem);
-}
-.academic-intro .section-title .blue {
-  display: block;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
   color: var(--teal-deep);
 }
-.academic-intro .section-title .taupe {
-  display: block;
-  color: var(--cream-dark);
-}
-.academic-intro .section-divider {
-  width: 160px;
-  height: 1px;
-  background: var(--copper);
-  margin: 40px 0;
-  position: relative;
-}
-.academic-intro .section-divider::before {
-  content: "◆";
-  position: absolute;
-  left: 50%;
-  top: -9px;
-  transform: translateX(-50%);
+.academic-intro .section-title span,
+.leadership-intro .section-title span {
   color: var(--copper);
-  font-size: 12px;
+  font-weight: 300;
 }
 .intro-text {
   font-family: var(--f-body);
   font-size: 0.98rem;
   line-height: 1.7;
-  color: #444444;
-  max-width: 360px;
+  color: #555555;
+  margin-top: 25px;
+}
+.academic-intro .intro-text {
+  max-width: 100%;
+}
+.leadership-intro .intro-text {
+  max-width: 700px;
 }
 
 /* ── TIMELINE SPINE ── */
@@ -2014,6 +1999,7 @@ section { padding: 7rem 4rem; }
   border-radius: 10px;
   opacity: 1;
   z-index: 0;
+  transform: translateX(-50%);
 }
 
 /* ── TIMELINE ITEMS ── */
@@ -2302,7 +2288,9 @@ section { padding: 7rem 4rem; }
   border: 1px solid rgba(201,165,90,0.45);
   border-radius: 28px;
   padding: 0;
-  margin-top: 48px;
+  margin: 80px auto 0 auto;
+  max-width: 1400px;
+  width: 100%;
   box-shadow:
     0 0 0 1px rgba(201,165,90,0.08),
     0 25px 60px rgba(8,20,38,0.55),
@@ -2502,10 +2490,17 @@ section { padding: 7rem 4rem; }
   .year-column { border-right: none; border-bottom: 1px solid #e2d6c9; padding-bottom: 15px; flex-direction: row; align-items: center; gap: 10px; }
   .content-column { padding-left: 0; }
   .content-column h3 { font-size: 1.35rem; }
-  .stats-cols-wrapper { flex-wrap: wrap; padding-top: 48px; }
-  .academic-stats-card .stat-col { min-width: 50%; }
-  .academic-stats-card .stat-col:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(201,165,90,0.18); }
-  .academic-stats-card .stat-col:nth-child(odd):not(:last-child) { border-right: 1px solid rgba(201,165,90,0.18); }
+  .stats-cols-wrapper { display: grid !important; grid-template-columns: 1fr 1fr !important; padding-top: 0 !important; }
+  .academic-stats-card .stat-col { padding: 28px 16px 30px !important; border-right: none !important; border-bottom: none !important; }
+  .academic-stats-card .stat-col:nth-child(odd) { border-right: 1px solid rgba(201,165,90,0.18) !important; }
+  .academic-stats-card .stat-col:nth-child(-n+2) { border-bottom: 1px solid rgba(201,165,90,0.18) !important; }
+  .academic-stats-card .stat-icon-wrap { margin-bottom: 14px !important; }
+  .academic-stats-card .stat-icon { width: 52px !important; height: 52px !important; box-shadow: 0 0 0 4px rgba(201,165,90,0.06), 0 4px 12px rgba(201,165,90,0.1) !important; }
+  .academic-stats-card .stat-icon::before { top: -3px !important; width: 5px !important; height: 5px !important; }
+  .academic-stats-card .stat-icon svg { width: 22px !important; height: 22px !important; }
+  .academic-stats-card .stat-text strong { font-size: 1.55rem !important; }
+  .academic-stats-card .stat-text span { font-size: 0.72rem !important; line-height: 1.35 !important; }
+  .academic-stats-card { margin: 48px auto 0 auto !important; }
 }
 @media (max-width: 480px) {
   .timeline-icon { width: 46px; height: 46px; }
@@ -2515,15 +2510,15 @@ section { padding: 7rem 4rem; }
   .timeline-item { gap: 12px; }
   .timeline-card { padding: 20px 15px; }
   .content-column h3 { font-size: 1.25rem; }
-  .academic-stats-card { padding: 0; }
-  .academic-stats-card .stat-col { min-width: 100%; }
-  .academic-stats-card .stat-col:nth-child(odd):not(:last-child) { border-right: none; }
+  .academic-stats-card { margin-top: 36px !important; }
 }
 
 
 /* ─── LEADERSHIP & CAMPUS CONTRIBUTIONS (NEW DESIGN) ─── */
 .leadership-section {
-  background: linear-gradient(180deg, #F5EBDD 0%, #F8F4EF 100%);
+  background: radial-gradient(circle at 10% 20%, rgba(201,165,90,0.06) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(53,92,125,0.04) 0%, transparent 50%),
+              linear-gradient(180deg, #F5EBDD 0%, #F8F4EF 100%);
   padding: 120px 8%;
   position: relative;
   overflow: hidden;
@@ -2537,10 +2532,10 @@ section { padding: 7rem 4rem; }
   grid-template-columns: 1.25fr 0.75fr;
   align-items: center;
   gap: 40px;
-}
-
-.leadership-header-left {
-  max-width: 800px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .leadership-header-right {
@@ -2549,7 +2544,6 @@ section { padding: 7rem 4rem; }
   position: relative;
 }
 
-/* Wreath Watermark */
 .wreath-watermark {
   width: 200px;
   height: 200px;
@@ -2557,41 +2551,6 @@ section { padding: 7rem 4rem; }
   color: var(--teal-deep);
   pointer-events: none;
   user-select: none;
-}
-
-.leadership-section .section-tag {
-  font-family: var(--f-label);
-  display: inline-block;
-  color: var(--teal-deep);
-  font-weight: 600;
-  letter-spacing: 2px;
-  font-size: 13px;
-  margin-bottom: 25px;
-  text-transform: uppercase;
-}
-
-.leadership-header h2 {
-  font-family: var(--f-display);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.1;
-  color: var(--teal-deep);
-  font-weight: 800;
-}
-
-.leadership-header h2 span {
-  color: var(--copper);
-  font-style: normal;
-  font-weight: 300;
-}
-
-.leadership-header p {
-  font-family: var(--f-body);
-  max-width: 700px;
-  margin-top: 25px;
-  color: #555555;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  font-weight: 300;
 }
 
 /* Timeline Container */
@@ -2644,7 +2603,7 @@ section { padding: 7rem 4rem; }
   width: 68px;
   height: 68px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(135deg, #ffffff 0%, #fcfbf9 100%) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   color: var(--teal-deep);
@@ -2654,8 +2613,8 @@ section { padding: 7rem 4rem; }
   font-family: var(--f-script);
   font-weight: 700;
   font-size: 1.35rem;
-  border: 2px solid var(--teal-deep);
-  box-shadow: 0 6px 20px rgba(53,92,125,0.08);
+  border: 2px solid var(--gold);
+  box-shadow: 0 6px 20px rgba(201,165,90,0.15), 0 2px 5px rgba(0,0,0,0.02);
   flex-shrink: 0;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -2665,7 +2624,7 @@ section { padding: 7rem 4rem; }
   height: 48px;
   border-radius: 50%;
   background: white;
-  border: 1px solid rgba(53, 92, 125, 0.15);
+  border: 1px solid rgba(201, 165, 90, 0.28);
   color: var(--copper);
   display: flex;
   align-items: center;
@@ -2684,16 +2643,16 @@ section { padding: 7rem 4rem; }
 
 .leadership-card .card-content {
   width: calc(50% - 60px);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 254, 252, 0.65);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(201, 165, 90, 0.22);
   border-radius: 28px;
   padding: 35px;
   display: grid;
   grid-template-columns: 1.15fr 1.2fr;
   gap: 30px;
-  box-shadow: 0 10px 40px rgba(53,92,125,0.03);
+  box-shadow: 0 12px 40px rgba(53, 92, 125, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   z-index: 1;
@@ -2829,7 +2788,7 @@ section { padding: 7rem 4rem; }
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(255,255,255,0.6);
+  border: 1px solid rgba(201, 165, 90, 0.18);
   box-shadow: 0 6px 20px rgba(0,0,0,0.03);
 }
 
@@ -2918,117 +2877,7 @@ section { padding: 7rem 4rem; }
 }
 
 /* Horizontal Impact Banner (Peacock / Luxury Dark Statement) */
-.impact-banner {
-  margin-top: 80px;
-  background: linear-gradient(135deg, var(--teal-deep) 0%, #203A43 100%);
-  border-radius: 28px;
-  padding: 45px 50px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 50px rgba(53,92,125,0.15);
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  gap: 50px;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-}
 
-.impact-banner-left {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-  padding-right: 40px;
-}
-
-.impact-banner-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-.impact-banner-icon svg {
-  width: 32px;
-  height: 32px;
-  stroke: currentColor;
-  fill: none;
-}
-
-.impact-banner-left p {
-  font-family: var(--f-body);
-  font-size: 0.98rem;
-  line-height: 1.7;
-  color: rgba(245, 235, 221, 0.85);
-  font-weight: 400;
-}
-
-.impact-banner-left p strong {
-  font-family: var(--f-display);
-  color: var(--gold);
-  font-weight: 800;
-}
-
-.impact-banner-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-.impact-banner-stats .stat-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.impact-banner-stats .stat-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-}
-
-.impact-banner-stats .stat-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-  fill: none;
-}
-
-.impact-banner-stats .stat-text strong {
-  font-family: var(--f-script);
-  font-size: 1.6rem;
-  color: var(--gold);
-  font-weight: 700;
-  display: block;
-  line-height: 1.2;
-}
-
-.impact-banner-stats .stat-text span {
-  font-family: var(--f-label);
-  font-size: 0.65rem;
-  color: rgba(245, 235, 221, 0.7);
-  margin-top: 4px;
-  display: block;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 500;
-}
 
 /* Responsive Media Queries for Leadership */
 @media (max-width: 1200px) {
@@ -3043,8 +2892,8 @@ section { padding: 7rem 4rem; }
 
 @media (max-width: 1024px) {
   .leadership-timeline::before {
-    left: 38px;
-    transform: none;
+    left: 38px !important;
+    transform: translateX(-50%) !important;
   }
   
   .leadership-card {
@@ -3080,17 +2929,7 @@ section { padding: 7rem 4rem; }
     box-shadow: 0 4px 10px rgba(53,92,125,0.1);
   }
   
-  .impact-banner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  
-  .impact-banner-left {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding-right: 0;
-    padding-bottom: 30px;
-  }
+
 }
 
 @media (max-width: 768px) {
@@ -3105,11 +2944,12 @@ section { padding: 7rem 4rem; }
   }
   
   .leadership-header-right {
-    display: none; /* hide watermark decoration on mobile */
+    display: none;
   }
   
   .leadership-timeline::before {
-    left: 20px;
+    left: 20px !important;
+    transform: translateX(-50%) !important;
   }
   
   .leadership-card {
@@ -3156,10 +2996,7 @@ section { padding: 7rem 4rem; }
     display: none; /* hide side thumbs on small mobile, slider is enough */
   }
   
-  .impact-banner-stats {
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 20px;
-  }
+
 }
 
 @media (max-width: 480px) {
@@ -4097,7 +3934,7 @@ section { padding: 7rem 4rem; }
   .pm-photo { height: 170px; }
   .photo-marquee-track { gap: 0.4rem; }
   .photo-marquee { margin-top: 2rem; }
-  .photo-marquee-label { margin-top: 2rem; padding: 0 1.5rem !important; }
+  .photo-marquee-label { margin-top: 2rem; }
 }
 
 
@@ -4139,6 +3976,19 @@ section { padding: 7rem 4rem; }
 }
 @media (max-width: 480px) {
   .timeline-progress-flow { left: 23px !important; }
+  .ach-grid {
+    grid-template-columns: 1fr;
+  }
+  .impact-nums {
+    grid-template-columns: 1fr;
+  }
+  .impact-item {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+  .impact-item:last-child {
+    border-bottom: none !important;
+  }
 }
 @media (max-width: 360px) {
   .leadership-timeline .timeline-progress-flow { display: none !important; }
@@ -4381,11 +4231,8 @@ section { padding: 7rem 4rem; }
       </div>
 
       <h2 class="section-title">
-        <span class="blue">Education &</span>
-        <span class="taupe">Foundations</span>
+        Education &<br><span>Foundations</span>
       </h2>
-
-      <div class="section-divider"></div>
 
       <p class="intro-text">
         My academic journey reflects a strong foundation in business and commerce,
@@ -4565,10 +4412,18 @@ section { padding: 7rem 4rem; }
 <!-- LEADERSHIP & CAMPUS CONTRIBUTIONS -->
 <section id="leadership" class="leadership-section">
   <div class="leadership-header">
-    <div class="leadership-header-left">
-      <span class="section-tag reveal">LEADERSHIP & CAMPUS CONTRIBUTIONS</span>
-      <h2 class="reveal reveal-delay-1">Leading Initiatives.<br>Creating <span>Impact.</span></h2>
-      <p class="reveal reveal-delay-2">Key leadership roles and contributions that reflect my passion for creating value, building communities, and driving change.</p>
+    <div class="leadership-intro reveal">
+      <div class="section-tag">
+        <span>LEADERSHIP & CAMPUS CONTRIBUTIONS</span>
+      </div>
+
+      <h2 class="section-title">
+        Leading Initiatives.<br>Creating <span>Impact.</span>
+      </h2>
+
+      <p class="intro-text">
+        Key leadership roles and contributions that reflect my passion for creating value, building communities, and driving change.
+      </p>
     </div>
     <div class="leadership-header-right reveal">
       <svg class="wreath-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
@@ -4843,79 +4698,87 @@ section { padding: 7rem 4rem; }
 
   </div>
 
-  <!-- Impact Statistics Banner -->
-  <div class="impact-banner reveal">
-    <div class="impact-banner-left">
-      <div class="impact-banner-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-          <path d="M4 22h16"></path>
-          <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
-          <path d="M12 2a6 6 0 0 1 6 6v5a6 6 0 0 1-6 6 6 6 0 0 1-6-6V8a6 6 0 0 1 6-6z"></path>
-        </svg>
-      </div>
-      <p>Actively contributed to the planning and execution of <strong style="color: var(--teal-deep);">50+</strong> cultural, technical, management, and business events during undergraduate studies.</p>
+  <!-- Leadership Stats Card — dark navy pill, full-width under timeline -->
+  <div class="academic-stats-card reveal reveal-delay-4">
+    <div class="stats-header-tag">
+      <span class="stats-header-inner">LEADERSHIP IMPACT</span>
     </div>
-    <div class="impact-banner-stats">
+    <div class="stats-cols-wrapper">
+
+      <!-- 50+ Events -->
       <div class="stat-col">
-        <div class="stat-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
+        <div class="stat-icon-wrap">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
         </div>
         <div class="stat-text">
-          <strong style="color: var(--teal-deep);">50+</strong>
-          <span>Events</span>
+          <strong>50+</strong>
+          <span>Events<br>Managed</span>
         </div>
       </div>
+
+      <!-- Multiple Roles -->
       <div class="stat-col">
-        <div class="stat-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
+        <div class="stat-icon-wrap">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
         </div>
         <div class="stat-text">
-          <strong style="color: var(--teal-deep);">Multiple</strong>
-          <span>Roles</span>
+          <strong>Multiple</strong>
+          <span>Leadership<br>Roles</span>
         </div>
       </div>
+
+      <!-- Cross-Functional -->
       <div class="stat-col">
-        <div class="stat-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-          </svg>
+        <div class="stat-icon-wrap">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
         </div>
         <div class="stat-text">
-          <strong style="color: var(--teal-deep);">Cross-Functional</strong>
-          <span>Leadership</span>
+          <strong>Diverse</strong>
+          <span>Cross-Functional<br>Leadership</span>
         </div>
       </div>
+
+      <!-- Impact Driven -->
       <div class="stat-col">
-        <div class="stat-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="6"></circle>
-            <circle cx="12" cy="12" r="2"></circle>
-          </svg>
+        <div class="stat-icon-wrap">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+          </div>
         </div>
         <div class="stat-text">
-          <strong style="color: var(--teal-deep);">Impact</strong>
-          <span>Driven</span>
+          <strong>Impact</strong>
+          <span>Purpose<br>Driven</span>
         </div>
       </div>
+
     </div>
   </div>
 
   <!-- All leadership photos — auto-scrolling cinema strip -->
-  <p class="photo-marquee-label" style="padding: 0 8%;">All Photos</p>
+  <p class="photo-marquee-label">All Photos</p>
   <div class="photo-marquee" data-section="leadership" data-speed="slow">
     <div class="photo-marquee-track"></div>
   </div>
@@ -4979,7 +4842,7 @@ section { padding: 7rem 4rem; }
   </div>
 
   <!-- All speaking photos — auto-scrolling cinema strip -->
-  <p class="photo-marquee-label" style="padding: 0 4rem;">All Photos</p>
+  <p class="photo-marquee-label">All Photos</p>
   <div class="photo-marquee" data-section="speaking" data-speed="medium">
     <div class="photo-marquee-track"></div>
   </div>
@@ -5030,7 +4893,7 @@ section { padding: 7rem 4rem; }
   </div>
 
   <!-- All achievement photos — auto-scrolling cinema strip -->
-  <p class="photo-marquee-label" style="padding: 0 4rem;">All Photos</p>
+  <p class="photo-marquee-label">All Photos</p>
   <div class="photo-marquee" data-section="achievements" data-speed="fast">
     <div class="photo-marquee-track"></div>
   </div>
