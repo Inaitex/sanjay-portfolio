@@ -9,9 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <script>
     const GALLERY_IMAGES = {
@@ -315,13 +313,6 @@
         });
       }
 
-      var flipWrapper = document.querySelector('.flip-card-wrapper');
-      if (flipWrapper) {
-        var moved = false;
-        flipWrapper.addEventListener('touchstart', function () { moved = false; }, { passive: true });
-        flipWrapper.addEventListener('touchmove', function () { moved = true; }, { passive: true });
-        flipWrapper.addEventListener('touchend', function () { if (!moved) flipWrapper.classList.toggle('tapped'); });
-      }
 
       // ── Card covers + CEO thumb strip: populate from GALLERIES ──
       // .card-cover[data-gallery] — single cover image (first image in gallery)
@@ -683,7 +674,7 @@
         var headIdx = 0;
 
         function updateSlots() {
-          photos.forEach(function(btn, i) {
+          photos.forEach(function (btn, i) {
             btn.className = 'pm-photo'; // reset
             var pos = (i - headIdx + pool.length) % pool.length;
             if (pos === 0) btn.classList.add('slot-1');
@@ -702,7 +693,7 @@
 
         var interval;
         function startMarquee() {
-          interval = setInterval(function() {
+          interval = setInterval(function () {
             // Infinite loop sliding leftward (right-to-left physical movement)
             headIdx = (headIdx + 1) % pool.length;
             updateSlots();
@@ -710,7 +701,7 @@
         }
         startMarquee();
 
-        wrapEl.addEventListener('mouseenter', function() { clearInterval(interval); });
+        wrapEl.addEventListener('mouseenter', function () { clearInterval(interval); });
         wrapEl.addEventListener('mouseleave', startMarquee);
 
         track.addEventListener('click', function (e) {
@@ -1275,28 +1266,34 @@
       transition: opacity 0.3s ease;
       white-space: nowrap;
     }
+
     .eh-logo:hover {
       opacity: 0.85;
     }
+
     .eh-logo .eh-elevate {
       text-transform: uppercase;
       color: var(--teal-deep);
       letter-spacing: 0.02em;
     }
+
     .eh-logo .eh-hub {
       text-transform: lowercase;
       color: var(--gold);
     }
+
     /* Logo on dark background / Elevate Section */
     #elevate .eh-logo .eh-elevate,
     footer .eh-logo .eh-elevate {
       color: var(--cream);
     }
+
     /* Logo inside buttons & elements that inherit */
     .btn-outline .eh-logo .eh-elevate,
     .btn-primary .eh-logo .eh-elevate {
       color: inherit;
     }
+
     .btn-outline:hover .eh-logo .eh-hub {
       color: var(--cream);
     }
@@ -1323,7 +1320,7 @@
         radial-gradient(rgba(53, 92, 125, 0.12) 1px, transparent 1px);
       background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px;
     }
-    
+
     .hero-bg::after {
       content: "";
       position: absolute;
@@ -1415,9 +1412,17 @@
       animation: fadeUp 1s ease both;
     }
 
-    .eyebrow-tag:nth-child(1) { animation-delay: 0.1s; }
-    .eyebrow-tag:nth-child(2) { animation-delay: 0.2s; }
-    .eyebrow-tag:nth-child(3) { animation-delay: 0.3s; }
+    .eyebrow-tag:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .eyebrow-tag:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .eyebrow-tag:nth-child(3) {
+      animation-delay: 0.3s;
+    }
 
     .eyebrow-tag:hover {
       background: rgba(255, 255, 255, 0.8);
@@ -1446,7 +1451,8 @@
     }
 
     /* Enforce no italics globally */
-    em, i {
+    em,
+    i {
       font-style: normal !important;
     }
 
@@ -1475,7 +1481,9 @@
     }
 
     @keyframes shimmer {
-      to { background-position: 200% center; }
+      to {
+        background-position: 200% center;
+      }
     }
 
     /* ── Hero tagline: Nexa upright (no italic) ── */
@@ -1536,9 +1544,11 @@
     .btn-primary::after {
       content: '';
       position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
       transition: all 0.5s ease;
     }
 
@@ -1547,7 +1557,7 @@
       transform: translateY(-4px);
       box-shadow: 0 15px 40px rgba(53, 92, 125, 0.25);
     }
-    
+
     .btn-primary:hover::after {
       left: 100%;
     }
@@ -1594,17 +1604,6 @@
       transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
     }
 
-    /* Touch devices: only `.tapped` toggles. Hover rule below is gated so iOS's
-   sticky :hover after first tap doesn't fight the JS toggle on tap 2. */
-    .flip-card-wrapper.tapped .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .flip-card-wrapper:hover .flip-card-inner {
-        transform: rotateY(180deg);
-      }
-    }
 
     .flip-front,
     .flip-back {
@@ -5022,7 +5021,7 @@
       background: rgba(245, 235, 221, 0.06);
     }
 
-    .footer-logo {
+    /* .footer-logo {
       font-family: var(--f-display);
       font-weight: 800;
       font-size: 3rem;
@@ -5030,7 +5029,7 @@
       line-height: 1;
       margin-bottom: 1.5rem;
       letter-spacing: 0.05em;
-    }
+    } */
 
     .footer-name {
       font-family: var(--f-display);
@@ -5625,9 +5624,6 @@
         height: 460px;
       }
 
-      .flip-card-wrapper.tapped .flip-card-inner {
-        transform: rotateY(180deg);
-      }
 
       #about {
         display: block;
@@ -5775,7 +5771,7 @@
       transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease, filter 0.9s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
       pointer-events: none;
-      
+
       /* Apple-style continuous curve & subtle glass frame */
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -5807,39 +5803,113 @@
       transform: scale(0.95);
     }
 
-    .pm-photo.slot-1 { left: 0%;   width: 12%; z-index: 2; opacity: 0.2; filter: blur(2px); }
-    .pm-photo.slot-2 { left: 14%;  width: 12%; z-index: 2; opacity: 0.5; filter: blur(1px); }
-    
+    .pm-photo.slot-1 {
+      left: 0%;
+      width: 12%;
+      z-index: 2;
+      opacity: 0.2;
+      filter: blur(2px);
+    }
+
+    .pm-photo.slot-2 {
+      left: 14%;
+      width: 12%;
+      z-index: 2;
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+
     /* HUGE Center */
-    .pm-photo.slot-3 { 
-      left: 28%;  
-      width: 44%; 
-      top: 0; 
-      height: 100%; 
-      z-index: 3; 
-      opacity: 1; 
+    .pm-photo.slot-3 {
+      left: 28%;
+      width: 44%;
+      top: 0;
+      height: 100%;
+      z-index: 3;
+      opacity: 1;
       filter: blur(0);
       transform: scale(1);
       pointer-events: auto;
       border-radius: 24px;
       border: 1px solid rgba(255, 255, 255, 0.25);
-    } 
-    
-    .pm-photo.slot-4 { left: 74%;  width: 12%; z-index: 2; opacity: 0.5; filter: blur(1px); }
-    .pm-photo.slot-5 { left: 88%;  width: 12%; z-index: 2; opacity: 0.2; filter: blur(2px); }
+    }
+
+    .pm-photo.slot-4 {
+      left: 74%;
+      width: 12%;
+      z-index: 2;
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+
+    .pm-photo.slot-5 {
+      left: 88%;
+      width: 12%;
+      z-index: 2;
+      opacity: 0.2;
+      filter: blur(2px);
+    }
 
     /* Exiting/Entering Positions */
-    .pm-photo.hidden-left { left: -20%; width: 12%; top: 15%; height: 70%; opacity: 0; filter: blur(4px); transform: scale(0.8); }
-    .pm-photo.hidden-right { left: 108%; width: 12%; top: 15%; height: 70%; opacity: 0; filter: blur(4px); transform: scale(0.8); }
+    .pm-photo.hidden-left {
+      left: -20%;
+      width: 12%;
+      top: 15%;
+      height: 70%;
+      opacity: 0;
+      filter: blur(4px);
+      transform: scale(0.8);
+    }
+
+    .pm-photo.hidden-right {
+      left: 108%;
+      width: 12%;
+      top: 15%;
+      height: 70%;
+      opacity: 0;
+      filter: blur(4px);
+      transform: scale(0.8);
+    }
 
     @media (max-width: 768px) {
-      .photo-marquee { height: 280px; padding: 0 2%; }
-      .pm-photo { top: 20%; height: 60%; }
-      .pm-photo.slot-1 { left: -15%; opacity: 0; pointer-events: none; }
-      .pm-photo.slot-2 { left: 0%;   width: 20%; }
-      .pm-photo.slot-3 { left: 24%;  width: 52%; top: 0; height: 100%; }
-      .pm-photo.slot-4 { left: 80%;  width: 20%; }
-      .pm-photo.slot-5 { left: 115%; opacity: 0; pointer-events: none; }
+      .photo-marquee {
+        height: 280px;
+        padding: 0 2%;
+      }
+
+      .pm-photo {
+        top: 20%;
+        height: 60%;
+      }
+
+      .pm-photo.slot-1 {
+        left: -15%;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .pm-photo.slot-2 {
+        left: 0%;
+        width: 20%;
+      }
+
+      .pm-photo.slot-3 {
+        left: 24%;
+        width: 52%;
+        top: 0;
+        height: 100%;
+      }
+
+      .pm-photo.slot-4 {
+        left: 80%;
+        width: 20%;
+      }
+
+      .pm-photo.slot-5 {
+        left: 115%;
+        opacity: 0;
+        pointer-events: none;
+      }
     }
 
     /* Hover overlay pill */
@@ -5904,10 +5974,10 @@
 
     /* (Old CSS keyframes removed for the new slot architecture) */
 
-      .photo-marquee::-webkit-scrollbar {
-        display: none;
-      }
+    .photo-marquee::-webkit-scrollbar {
+      display: none;
     }
+
 
     /* Mobile */
     @media (max-width: 600px) {
@@ -6144,8 +6214,10 @@
         <span class="eyebrow-tag"><i class="tag-icon">✦</i> Creative Strategist</span>
         <span class="eyebrow-tag"><i class="tag-icon">✦</i> Branding &amp; Marketing</span>
       </div>
-      <h1 class="hero-name">Crafting Brands That<br><em>Connect, Engage</em><br>&amp; <span
-          class="hero-name-gold">Elevate.</span></h1>
+      <h1 class="hero-name">Crafting Brands That<br><em>Connect, Engage</em><br>&amp;
+        <!-- TODO: Remove animation as the color hard to read -->
+        <span class="hero-name-gold">Elevate.</span>
+      </h1>
       <!-- <p class="hero-tagline">Sanjay V — Founder of Elevate Hub</p> -->
       <p class="hero-desc">Young entrepreneur and creative strategist focused on digital marketing, offline branding,
         experiential campaigns, and modern business growth solutions.</p>
@@ -6162,7 +6234,6 @@
 
           <!-- FRONT -->
           <div class="flip-front">
-            <div class="flip-hint">Hover</div>
             <div class="flip-front-photo" id="profilePhotoEl">
               <div class="flip-front-initials">SV</div>
             </div>
@@ -6324,7 +6395,6 @@
               <h3>MBA</h3>
               <p class="college">Master of Business Administration</p>
               <p>SRM Institute of Science and Technology</p>
-              <span class="badge pursuing">Currently Pursuing</span>
             </div>
           </div>
         </div>
@@ -6339,6 +6409,7 @@
             </svg>
           </div>
           <div class="timeline-card">
+            <div class="card-ribbon check-ribbon"></div>
             <div class="year-column">
               <span class="year-val">2021</span>
               <span class="year-sep">TO</span>
@@ -6348,7 +6419,7 @@
               <h3>Bachelor of Commerce</h3>
               <p class="college">B.Com (General)</p>
               <p>SRM Institute of Science and Technology – Ramapuram Campus</p>
-              <span class="badge">CGPA : 8.89</span>
+              <p style="font-size: 0.9rem; color: #666; margin-top: 0.4rem;">CGPA: 8.89</p>
               <div class="edu-photo-row" data-gallery="edu-bcom">
                 <div class="thumb" data-gallery-index="0"><img src="images-opt/B.com graduation/1778940049284-thumb.jpg"
                     alt="" loading="lazy"></div>
@@ -6375,16 +6446,17 @@
           <div class="timeline-card">
             <div class="card-ribbon check-ribbon"></div>
             <div class="year-column">
-              <span class="year-label">COMPLETED</span>
+              <span class="year-val">2020</span>
+              <span class="year-sep">TO</span>
               <span class="year-val">2021</span>
             </div>
             <div class="content-column">
               <h3>Higher Secondary Education</h3>
               <p>Hussain Memorial Matriculation Higher Secondary School, Ambattur</p>
               <p class="college">Commerce Group</p>
-              <div class="grade-row">
-                <span class="badge">12TH : 85%</span>
-                <span class="badge">10TH : 76%</span>
+              <div class="grade-row" style="margin-top: 0.4rem; gap: 1rem;">
+                <span style="font-size: 0.9rem; color: #666;">12TH: 85%</span>
+                <span style="font-size: 0.9rem; color: #666;">10TH: 76%</span>
               </div>
             </div>
           </div>
@@ -7086,7 +7158,9 @@
     <div>
       <div class="section-eyebrow" style="margin-bottom:1.2rem;">Currently Building</div>
       <div class="building-badge">New Venture</div>
-      <h2 class="building-brand">Anugraha Niketan<em>A New Venture</em></h2>
+      <h2 class="building-brand">Anugraha Niketan
+        <!-- <em>A New Venture</em> -->
+      </h2>
       <div class="divider-diamond" aria-hidden="true"><i></i></div>
       <p class="building-desc">A premium divine lifestyle and decor brand focused on spiritually inspired aesthetics,
         traditional elegance, and modern presentation. Where heritage meets contemporary design.</p>
@@ -7097,9 +7171,11 @@
   <footer class="site-footer" id="contact">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo">SV</div>
+        <!-- <div class="footer-logo">SV</div> -->
         <h2 class="footer-name">Sanjay V</h2>
-        <p class="footer-title" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.4rem;">FOUNDER OF <a href="https://elevatehub.inaitex.in/" target="_blank" class="eh-logo" style="font-size: 1.2em;"><span class="eh-elevate">ELEVATE</span><span class="eh-hub">hub</span></a></p>
+        <p class="footer-title" style="display: flex; align-items: center; justify-content: flex-start; gap: 0.4rem;">
+          FOUNDER OF <a href="https://elevatehub.inaitex.in/" target="_blank" class="eh-logo"
+            style="font-size: 1.2em;"><span class="eh-elevate">ELEVATE</span><span class="eh-hub">hub</span></a></p>
         <p class="footer-desc">Crafting modern brand experiences through strategy, creativity, and execution.</p>
         <!-- <div class="footer-signature">Sanjay V</div> -->
       </div>
@@ -7184,7 +7260,7 @@
             </div>
             <div class="contact-text">
               <span class="contact-label">BASED IN</span>
-              <span class="contact-val">Coimbatore, India</span>
+              <span class="contact-val">Chennai, Tamil Nadu</span>
             </div>
           </li>
         </ul>
@@ -7193,7 +7269,9 @@
 
     <div class="footer-bottom">
       <div class="footer-copyright">
-        <p style="display: flex; align-items: center; gap: 0.3rem;">© 2026 SANJAY V · <a href="https://elevatehub.inaitex.in/" target="_blank" class="eh-logo" style="font-size: 1em;"><span class="eh-elevate">ELEVATE</span><span class="eh-hub">hub</span></a></p>
+        <p style="display: flex; align-items: center; gap: 0.3rem;">© 2026 SANJAY V · <a
+            href="https://elevatehub.inaitex.in/" target="_blank" class="eh-logo" style="font-size: 1em;"><span
+              class="eh-elevate">ELEVATE</span><span class="eh-hub">hub</span></a></p>
         <p>All rights reserved.</p>
       </div>
       <div class="footer-center-tag">
