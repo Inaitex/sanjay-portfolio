@@ -325,8 +325,9 @@
 
 
       // ── Card covers + CEO thumb strip: populate from GALLERIES ──
-      // .card-cover[data-gallery] — single cover image (first image in gallery)
-      document.querySelectorAll('.card-cover[data-gallery]').forEach(function (el) {
+      // .card-cover[data-gallery] — auto-cycling slideshow of every image in the gallery
+      var coverReduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('.card-cover[data-gallery]').forEach(function (el, cardIdx) {
         var id = el.getAttribute('data-gallery');
         var g = GALLERIES[id];
         if (!g || !g.images || !g.images.length) {
@@ -334,23 +335,45 @@
           return;
         }
         el.removeAttribute('hidden');
-        var first = g.images[0];
-        var thumbSrc = (first && first.thumb) || first;
-        if (g.images.length === 1) el.classList.add('is-single');
-        var img = new Image();
-        img.alt = g.title + ' — preview';
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        img.src = thumbSrc;
         el.innerHTML = '';
-        el.appendChild(img);
-        if (g.images.length > 1) {
+        var imgs = g.images;
+        if (imgs.length === 1) el.classList.add('is-single');
+
+        var slides = imgs.map(function (im, i) {
+          var src = (im && im.thumb) || im;
+          var img = new Image();
+          img.alt = g.title + ' — ' + (i + 1);
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.src = src;
+          img.className = 'cover-slide' + (i === 0 ? ' is-active' : '');
+          el.appendChild(img);
+          return img;
+        });
+
+        if (imgs.length > 1) {
           var count = document.createElement('div');
           count.className = 'cover-count';
           count.innerHTML = '<span style="display: flex; align-items: center; gap: 6px;">' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>' +
-            '+' + (g.images.length - 1) + ' Photos</span>';
+            '+' + (imgs.length - 1) + ' Photos</span>';
           el.appendChild(count);
+
+          // Auto-cycle the slides one by one (cross-fade). Pause on hover so it stays clickable.
+          if (!coverReduceMotion) {
+            var cur = 0, timer = null;
+            function advance() {
+              slides[cur].classList.remove('is-active');
+              cur = (cur + 1) % slides.length;
+              slides[cur].classList.add('is-active');
+            }
+            function play() { if (!timer) timer = setInterval(advance, 3000); }
+            function pause() { if (timer) { clearInterval(timer); timer = null; } }
+            el.addEventListener('mouseenter', pause);
+            el.addEventListener('mouseleave', play);
+            // Stagger each card's start so they don't all flip together.
+            setTimeout(play, 700 + (cardIdx % 6) * 450);
+          }
         }
       });
 
@@ -1760,15 +1783,23 @@
     }
 
     .card-cover img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: contain;
       object-position: center;
       display: block;
-      transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), filter 0.3s;
+      opacity: 0;
+      transition: opacity 0.9s ease, transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), filter 0.3s;
     }
 
-    .card-cover:hover img {
+    /* Only the active slide is visible; others fade behind it */
+    .card-cover img.is-active {
+      opacity: 1;
+    }
+
+    .card-cover:hover img.is-active {
       transform: scale(1.05);
     }
 
