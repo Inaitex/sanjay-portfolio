@@ -164,8 +164,12 @@
       },
       'speak-guest-lecture': {
         title: "Guest Lecture — Digital Marketing & E-Commerce", images: [
-          { thumb: "images-opt/Profile picture/profile picture-thumb.jpg", full: "images-opt/Profile picture/profile picture-full.jpg" }
-        ] /* placeholder */
+          { thumb: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.07 AM (1)-thumb.jpg", full: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.07 AM (1)-full.jpg" },
+          { thumb: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.06 AM-thumb.jpg", full: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.06 AM-full.jpg" },
+          { thumb: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.06 AM (1)-thumb.jpg", full: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.06 AM (1)-full.jpg" },
+          { thumb: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.06 AM (2)-thumb.jpg", full: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.06 AM (2)-full.jpg" },
+          { thumb: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.07 AM-thumb.jpg", full: "images-opt/Guest Appearances & Speaking/Digital Marketing & E-Commerce - Guest Lecture/WhatsApp Image 2026-06-24 at 2.00.07 AM-full.jpg" }
+        ]
       },
       'speak-fusion': {
         title: "Judge — Fusion'26", images: [
@@ -207,12 +211,12 @@
       },
       'ach-cofounder': {
         title: "Honoured as Co-Founder of Commerce Conglomeration", images: [
+          { thumb: "images-opt/Achievements & Recognitions/Commerzium 23/1778940050974-thumb.jpg", full: "images-opt/Achievements & Recognitions/Commerzium 23/1778940050974-full.jpg" },
           { thumb: "images-opt/Achievements & Recognitions/Commerzium 23/1778940048967-thumb.jpg", full: "images-opt/Achievements & Recognitions/Commerzium 23/1778940048967-full.jpg" },
           { thumb: "images-opt/Achievements & Recognitions/Commerzium 23/1778940049012-thumb.jpg", full: "images-opt/Achievements & Recognitions/Commerzium 23/1778940049012-full.jpg" },
           { thumb: "images-opt/Achievements & Recognitions/Commerzium 23/1778940049046-thumb.jpg", full: "images-opt/Achievements & Recognitions/Commerzium 23/1778940049046-full.jpg" },
           { thumb: "images-opt/Achievements & Recognitions/Commerzium 23/1778940050593-thumb.jpg", full: "images-opt/Achievements & Recognitions/Commerzium 23/1778940050593-full.jpg" },
           { thumb: "images-opt/Achievements & Recognitions/Commerzium 23/1778940050728-thumb.jpg", full: "images-opt/Achievements & Recognitions/Commerzium 23/1778940050728-full.jpg" },
-          { thumb: "images-opt/Achievements & Recognitions/Commerzium 23/1778940050974-thumb.jpg", full: "images-opt/Achievements & Recognitions/Commerzium 23/1778940050974-full.jpg" },
           { thumb: "images-opt/Achievements & Recognitions/Commerzium 23/IMG_20260517_102652-thumb.jpg", full: "images-opt/Achievements & Recognitions/Commerzium 23/IMG_20260517_102652-full.jpg" }
         ]
       },
@@ -1758,7 +1762,7 @@
     .card-cover img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
       display: block;
       transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), filter 0.3s;
@@ -4532,6 +4536,25 @@
       box-shadow: 0 12px 40px rgba(53, 92, 125, 0.06);
     }
 
+    .building-visual--photo {
+      aspect-ratio: auto;
+      background: none;
+      border: none;
+      box-shadow: 0 18px 50px rgba(53, 92, 125, 0.14);
+    }
+
+    .building-visual--photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 24px;
+    }
+
+    .building-visual--photo::before,
+    .building-visual--photo::after {
+      content: none;
+    }
+
     .building-visual::before {
       content: 'ANUGRAHA NIKETAN';
       font-family: var(--f-label);
@@ -5548,20 +5571,20 @@
       position: absolute;
       top: 15%;
       height: 70%;
-      overflow: hidden;
+      overflow: visible;
       cursor: pointer;
       padding: 0;
       margin: 0;
-      background: var(--cream-dark);
+      background: transparent;
       display: block;
       /* Include filter and transform in the transition for Apple depth-of-field effect */
       transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease, filter 0.9s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
       pointer-events: none;
 
-      /* Apple-style continuous curve & subtle glass frame */
+      /* No slot frame — the image itself defines the visible shape */
       border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: none;
       box-sizing: border-box;
       filter: blur(4px);
       transform: scale(0.85);
@@ -5571,8 +5594,10 @@
       height: 100%;
       width: 100%;
       max-width: none;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
       display: block;
+      border-radius: 12px;
       transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
     }
 
@@ -5618,7 +5643,7 @@
       transform: scale(1);
       pointer-events: auto;
       border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: none;
     }
 
     .pm-photo.slot-4 {
@@ -6800,7 +6825,10 @@
       <p class="building-desc">A premium divine lifestyle and decor brand focused on spiritually inspired aesthetics,
         traditional elegance, and modern presentation. Where heritage meets contemporary design.</p>
     </div>
-    <div class="building-visual reveal"></div>
+    <div class="building-visual building-visual--photo reveal">
+      <img src="images/Anugraha Niketan/ANUGRAHA_NIKETAN_Cover_Page.png"
+        alt="Anugraha Niketan — Bring Home the Divine. Launching Soon." loading="lazy" decoding="async">
+    </div>
   </section>
 
   <footer class="site-footer" id="contact">
